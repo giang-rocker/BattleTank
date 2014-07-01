@@ -19,6 +19,7 @@ public class BattleTank {
     
     void init () {
         game = new Game();
+        // xxx
     }
     
     public static void main(String[] args) {
