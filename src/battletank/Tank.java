@@ -52,11 +52,11 @@ public class Tank {
         this.damange = damange;
     }
 
-    public int getRange() {
+    public int getAttackRange() {
         return attackRange;
     }
 
-    public void setRange(int attackRange) {
+    public void setAttackRange(int attackRange) {
         this.attackRange = attackRange;
     }
 
@@ -75,6 +75,12 @@ public class Tank {
         this.damange = damange;
         this.attackRange = attackRange;
         this.price = price;
+    }
+
+    public Tank(int armor, int damange, int attackRange) {
+        this.armor = armor;
+        this.damange = damange;
+        this.attackRange = attackRange;
     }
     
     

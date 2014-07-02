@@ -1,0 +1,28 @@
+6
+500000
+CTU
+20000
+10000
+2000
+30000
+30000
+TVU
+30000
+5000
+3000
+50000
+20000
+
+/*
+MatchID_bets.txt
+bets's information of MatchID
+Data'structure:
+Current bet turn
+default Money of each team
+name of Team A
+(current bet turn -1) bet price of team A
+next (current bet turn -1) lines describe individual bet's information of team A
+name of Team B
+(current bet turn -1) bet price of team B
+next (current bet turn -1) lines describe individual bet's information of team B
+*/

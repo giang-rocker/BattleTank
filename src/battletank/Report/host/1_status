@@ -1,0 +1,32 @@
+CTU
+0
+4
+5 10 14 2 2
+4 2 4 1 3
+2 4 1 1 6 
+3 4 5 3 8
+TVU
+0
+6
+4 2 4 8 1
+2 4 1 6 2
+3 4 5 5 3
+4 2 4 6 3
+2 4 1 7 1
+3 4 5 7 3
+
+
+/*
+data structure
+team name
+team's point 
+num_Of_Tank_of_Team_A
+next num_Of_Tank_of_Team_A lines : describe tanks's information of Team A
+// tank_armor tank_damage tank_attack_range position_X position_Y
+
+num_Of_Tank_of_Team_B
+next num_Of_Tank_of_Team_B lines : describe tanks's information of Team B
+// tank_armor tank_damage tank_attack_range position_X position_Y
+
+
+*/

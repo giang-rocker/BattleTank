@@ -18,8 +18,8 @@ public class BattleTank {
      */
     
     void init () {
-        game = new Game();
-        // xxx
+        game = new Game(1);
+     
     }
     
     public static void main(String[] args) {
