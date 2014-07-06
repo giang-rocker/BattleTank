@@ -18,7 +18,7 @@ public class Game {
     private Team teamB;
     private Tank tanks[]; // tanks infomation of this game
     private Setting setting;
-    private ReadReport readReport;
+    private  Report report;
 
     public static void setCOLUMN(int COLUMN) {
         Game.COLUMN = COLUMN;
@@ -44,12 +44,12 @@ public class Game {
         this.setting = setting;
     }
 
-    public ReadReport getReadReport() {
-        return readReport;
+    public Report getReport() {
+        return report;
     }
 
-    public void setReadReport(ReadReport readReport) {
-        this.readReport = readReport;
+    public void setReadReport(Report report) {
+        this.report = report;
     }
 
     public void setTeamA(Team teamA) {
@@ -73,7 +73,7 @@ public class Game {
         this.teamB = new Team(0, null);
         this.matchId = matchId;
         setting = new Setting();
-        readReport = new ReadReport(matchId);
+        report = new Report(matchId);
         tanks = new Tank[Setting.MAX_TANK];
     }
 

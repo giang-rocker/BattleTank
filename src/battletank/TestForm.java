@@ -87,7 +87,7 @@ public class TestForm extends javax.swing.JFrame {
                 Game game;
                  game = new Game(1);
                 try {
-                    game.getReadReport().readReportTank(game.getTanks(), game.getSetting().getNumOfTank() );
+                    game.getReport().readReportTank(game);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(TestForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

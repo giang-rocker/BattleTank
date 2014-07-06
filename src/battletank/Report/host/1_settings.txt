@@ -1,0 +1,16 @@
+5
+CTU
+TVU
+10
+100000
+10
+
+/*
+file's structure
+Match_id
+Name of team 1
+Name of team 2
+Num of tank
+Default Money of each team
+num Of Turn
+*/

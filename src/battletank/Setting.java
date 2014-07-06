@@ -17,6 +17,33 @@ public class Setting {
    private int numOfTank;
    private int defaultMoney;
   private  int defaultPoint;
+  private int MatchID;
+  private String nameTeamA;
+  private String nameTeamB;
+
+    public String getNameTeamA() {
+        return nameTeamA;
+    }
+
+    public void setNameTeamA(String nameTeamA) {
+        this.nameTeamA = nameTeamA;
+    }
+
+    public String getNameTeamB() {
+        return nameTeamB;
+    }
+
+    public void setNameTeamB(String nameTeamB) {
+        this.nameTeamB = nameTeamB;
+    }
+
+    public int getMatchID() {
+        return MatchID;
+    }
+
+    public void setMatchID(int MatchID) {
+        this.MatchID = MatchID;
+    }
 
     public int getNumOfTurn() {
         return numOfTurn;
