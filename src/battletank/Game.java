@@ -5,12 +5,21 @@
  */
 package battletank;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Administrator
  */
 public class Game {
 
+    public enum GAME_STATE {
+
+        BET, PLACE, ACTION, FINISH
+    };
+    public GAME_STATE gameState;
     public static int COLUMN = 8;
     public static int ROW = 8;
     private int matchId;
@@ -18,7 +27,7 @@ public class Game {
     private Team teamB;
     private Tank tanks[]; // tanks infomation of this game
     private Setting setting;
-    private  Report report;
+    private Report report;
 
     public static void setCOLUMN(int COLUMN) {
         Game.COLUMN = COLUMN;
@@ -48,7 +57,7 @@ public class Game {
         return report;
     }
 
-    public void setReadReport(Report report) {
+    public void setReport(Report report) {
         this.report = report;
     }
 
@@ -60,12 +69,37 @@ public class Game {
         this.teamB = teamB;
     }
 
+    public Team getTeamA() {
+        return teamA;
+    }
+
+    public Team getTeamB() {
+        return teamB;
+    }
+
     public Tank[] getTanks() {
         return tanks;
     }
 
     public void setTanks(Tank[] tanks) {
         this.tanks = tanks;
+    }
+
+    public GAME_STATE getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GAME_STATE gameState) {
+        this.gameState = gameState;
+    }
+
+    public Game() {
+        this.teamA = new Team(0, null);
+        this.teamB = new Team(0, null);
+        setting = new Setting();
+        report = new Report(matchId);
+        tanks = new Tank[Setting.MAX_TANK];
+        this.gameState = GAME_STATE.BET;
     }
 
     public Game(int matchId) {
@@ -75,11 +109,40 @@ public class Game {
         setting = new Setting();
         report = new Report(matchId);
         tanks = new Tank[Setting.MAX_TANK];
+         this.gameState = GAME_STATE.BET;
     }
 
     public Game(Team teamA, Team teamB) {
         this.teamA = new Team(teamA.getMoney(), teamA.getTeamName());
         this.teamB = new Team(teamB.getMoney(), teamB.getTeamName());
+
+    }
+
+    public void updateGame() {
+
+        if (this.gameState == GAME_STATE.BET) {
+            updateBetTurn();
+        }
+    }
+
+    private void updateBetTurn() {
+        try {
+         
+            this.getReport().readTeamBetDecision(this);
+ 
+            try {
+                this.getReport().updateTeamReportBet(this);
+                this.getSetting().updateBetTurn();
+              
+            } catch (IOException ex) {
+             
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } catch (IOException ex) {
+            
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

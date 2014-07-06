@@ -10,7 +10,7 @@ package battletank;
  *
  * @author Administrator
  */
-public class ReportPlace {
+public class DecisionPlace {
     int tankID;
     Position position;
 }

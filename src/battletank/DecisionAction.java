@@ -10,9 +10,7 @@ package battletank;
  *
  * @author Administrator
  */
-public class ReportBet {
-    int betTurn;
-    int price;
+public class DecisionAction {
     
     
 }

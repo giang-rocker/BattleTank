@@ -14,6 +14,9 @@ public class Setting {
    public static int MAX_TANK = 50;
    private int numOfTurn;
    private  int currentTurn;
+   
+   private int currentBetTurn;
+   
    private int numOfTank;
    private int defaultMoney;
   private  int defaultPoint;
@@ -85,5 +88,48 @@ public class Setting {
         this.defaultPoint = defaultPoint;
     }
 
+    public static int getMAX_TANK() {
+        return MAX_TANK;
+    }
+
+    public static void setMAX_TANK(int MAX_TANK) {
+        Setting.MAX_TANK = MAX_TANK;
+    }
+
+    public int getCurrentBetTurn() {
+        return currentBetTurn;
+    }
+
+    public void setCurrentBetTurn(int currentBetTurn) {
+        this.currentBetTurn = currentBetTurn;
+    }
+
+    public Setting(int numOfTurn, int currentTurn, int currentBetTurn, int numOfTank, int defaultMoney, int defaultPoint, int MatchID, String nameTeamA, String nameTeamB) {
+        this.numOfTurn = numOfTurn;
+        this.currentTurn = currentTurn;
+        this.currentBetTurn = currentBetTurn;
+        this.numOfTank = numOfTank;
+        this.defaultMoney = defaultMoney;
+        this.defaultPoint = defaultPoint;
+        this.MatchID = MatchID;
+        this.nameTeamA = nameTeamA;
+        this.nameTeamB = nameTeamB;
+    }
+
+    public Setting() {
+        this.setCurrentBetTurn(0);
+    }
+    
+    
+    
+    public void updateTurn (){
+        
+    }
+
+    void updateBetTurn() {
+       this.currentBetTurn++;
+        
+        
+    }
  
 }
