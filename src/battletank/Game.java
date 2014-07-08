@@ -5,7 +5,9 @@
  */
 package battletank;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,11 +17,7 @@ import java.util.logging.Logger;
  */
 public class Game {
 
-    public enum GAME_STATE {
-
-        BET, PLACE, ACTION, FINISH
-    };
-    public GAME_STATE gameState;
+  
     public static int COLUMN = 8;
     public static int ROW = 8;
     private int matchId;
@@ -85,13 +83,7 @@ public class Game {
         this.tanks = tanks;
     }
 
-    public GAME_STATE getGameState() {
-        return gameState;
-    }
-
-    public void setGameState(GAME_STATE gameState) {
-        this.gameState = gameState;
-    }
+  
 
     public Game() {
         this.teamA = new Team(0, null);
@@ -99,17 +91,27 @@ public class Game {
         setting = new Setting();
         report = new Report(matchId);
         tanks = new Tank[Setting.MAX_TANK];
-        this.gameState = GAME_STATE.BET;
+        setting.setGameState( Setting.GAME_STATE.BET );
+      
     }
 
     public Game(int matchId) {
-        this.teamA = new Team(0, null);
-        this.teamB = new Team(0, null);
+  
         this.matchId = matchId;
-        setting = new Setting();
         report = new Report(matchId);
+        setting = new Setting();
+          try {
+            // set setting
+            report.readSetting(this);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TestForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         tanks = new Tank[Setting.MAX_TANK];
-         this.gameState = GAME_STATE.BET;
+        this.teamA = new Team(setting.getDefaultMoney() , setting.getNameTeamA());
+        this.teamB = new Team(setting.getDefaultMoney() , setting.getNameTeamB());
+        
+        setting.setGameState(Setting.GAME_STATE.BET);
     }
 
     public Game(Team teamA, Team teamB) {
@@ -117,14 +119,30 @@ public class Game {
         this.teamB = new Team(teamB.getMoney(), teamB.getTeamName());
 
     }
-
+// Update Game by game state
     public void updateGame() {
 
-        if (this.gameState == GAME_STATE.BET) {
+        if (this.getSetting().getGameState() == Setting.GAME_STATE.BET) {
             updateBetTurn();
+            if (this.getSetting().getCurrentBetTurn() == this.getSetting().getNumOfTank())  this.getSetting().setGameState(Setting.GAME_STATE.PLACE);
         }
+        
+        
+        if (this.getSetting().getGameState() == Setting.GAME_STATE.PLACE) {
+            updatePlace();
+            this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
+        //    if (this.getSetting().getCurrentBetTurn() == this.getSetting().getNumOfTank())  this.getSetting().setGameState(Setting.GAME_STATE.PLACE);
+       
+        }
+        
+         if (this.getSetting().getGameState() == Setting.GAME_STATE.ACTION) {
+            updateAction();
+        //    if (this.getSetting().getCurrentBetTurn() == this.getSetting().getNumOfTank())  this.getSetting().setGameState(Setting.GAME_STATE.PLACE);
+        // update status board    
+         }
+        
     }
-
+// update BET
     private void updateBetTurn() {
         try {
          
@@ -132,8 +150,12 @@ public class Game {
  
             try {
                 this.getReport().updateTeamReportBet(this);
+                // reduce money of eachteam
+              this.getTeamA().payMoney ( this.getTeamA().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice() );
+               this.getTeamB().payMoney ( this.getTeamB().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice() ); 
+                // next turn
                 this.getSetting().updateBetTurn();
-              
+                
             } catch (IOException ex) {
              
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -144,6 +166,41 @@ public class Game {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    // update Place
+    private void updatePlace() {
+       // read place decision
+        this.getReport().readTeamPlaceDecision(this);
+        // load teams's decision place
+        
+        // check illegal decision
+        
+          // set team go first
+          if ( this.getTeamA().getMoney() > this.getTeamB().getMoney() )  {
+              this.getSetting().setCurrentTeamAction("A");
+          }
+          else if ( this.getTeamA().getMoney() < this.getTeamB().getMoney() )  {
+              this.getSetting().setCurrentTeamAction("B");
+          }
+          else  {
+              Random R = new Random();
+              boolean f = R.nextBoolean();
+            //  if (f)   this.getSetting().setCurrentTeamAction("A");
+                   this.getSetting().setCurrentTeamAction("A");
+          }
+            
+    }
+    // update Action
+    private void updateAction() {
+       // read action decision
+        this.getReport().readTeamActionDecision(this,this.getSetting().getCurrentTeamAction());
+        // load teams's decision place
+        
+        // check illegal decision
+        
+        // update current team action
+        this.getSetting().updateActionTurn();
+        
     }
 
 }

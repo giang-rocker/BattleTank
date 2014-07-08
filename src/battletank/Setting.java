@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package battletank;
 
 /**
@@ -11,18 +10,32 @@ package battletank;
  * @author Administrator
  */
 public class Setting {
-   public static int MAX_TANK = 50;
-   private int numOfTurn;
-   private  int currentTurn;
-   
-   private int currentBetTurn;
-   
-   private int numOfTank;
-   private int defaultMoney;
-  private  int defaultPoint;
-  private int MatchID;
-  private String nameTeamA;
-  private String nameTeamB;
+
+    public static enum GAME_STATE {
+
+        BET, PLACE, ACTION, FINISH
+    };
+
+    public static enum TEAM {
+
+        A, B
+    };
+
+    public GAME_STATE gameState;
+
+    public static int MAX_TANK = 50;
+    private int numOfTurn;
+    private int currentTurn;
+
+    private int currentBetTurn;
+
+    private int numOfTank;
+    private int defaultMoney;
+    private int defaultPoint;
+    private int MatchID;
+    private String nameTeamA;
+    private String nameTeamB;
+    private String currentTeamAction;
 
     public String getNameTeamA() {
         return nameTeamA;
@@ -104,6 +117,22 @@ public class Setting {
         this.currentBetTurn = currentBetTurn;
     }
 
+    public GAME_STATE getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GAME_STATE gameState) {
+        this.gameState = gameState;
+    }
+
+    public String getCurrentTeamAction() {
+        return currentTeamAction;
+    }
+
+    public void setCurrentTeamAction(String currentTeamAction) {
+        this.currentTeamAction = currentTeamAction;
+    }
+
     public Setting(int numOfTurn, int currentTurn, int currentBetTurn, int numOfTank, int defaultMoney, int defaultPoint, int MatchID, String nameTeamA, String nameTeamB) {
         this.numOfTurn = numOfTurn;
         this.currentTurn = currentTurn;
@@ -119,17 +148,21 @@ public class Setting {
     public Setting() {
         this.setCurrentBetTurn(0);
     }
-    
-    
-    
-    public void updateTurn (){
-        
+
+    public void updateTurn() {
+
     }
 
     void updateBetTurn() {
-       this.currentBetTurn++;
-        
-        
+        this.currentBetTurn++;
+
     }
- 
+
+    void updateActionTurn() {
+        if (this.getCurrentTeamAction() == "A") {
+            this.setCurrentTeamAction("B");
+        } else {
+            this.setCurrentTeamAction("A");
+        }
+    }
 }

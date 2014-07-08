@@ -18,9 +18,9 @@ public class Team {
     Tank[] enemyTanks ; //Information of Enemy's Tanks
     DecisionBet[] decisionBet; // information of bets of Player
     DecisionBet[] enemyDecisionBet; // information of Enemy's bets
-    DecisionPlace[] decisionPlaces;  // information of Enemy's
-    DecisionPlace[] enemyDecisionPlaces; 
-    DecisionAction[] decisionAction; // status of map
+    DecisionPlace[] decisionPlace;  // information of Enemy's
+    DecisionPlace[] enemyDecisionPlace; 
+    DecisionAction decisionAction; // status of map
 
     public String getTeamName() {
         return teamName;
@@ -54,19 +54,19 @@ public class Team {
         this.decisionBet = decisionBet;
     }
 
-    public DecisionPlace []  getDecisionPlaces() {
-        return decisionPlaces;
+    public DecisionPlace []  getDecisionPlace() {
+        return decisionPlace;
     }
 
-    public void setDecisionPlaces(DecisionPlace []  decisionPlaces) {
-        this.decisionPlaces = decisionPlaces;
+    public void setDecisionPlace(DecisionPlace []  decisionPlaces) {
+        this.decisionPlace = decisionPlaces;
     }
 
-    public DecisionAction [] getDecisionAction() {
+    public DecisionAction getDecisionAction() {
         return decisionAction;
     }
 
-    public void setDecisionAction(DecisionAction [] decisionAction) {
+    public void setDecisionAction(DecisionAction decisionAction) {
         this.decisionAction = decisionAction;
     }
 
@@ -74,6 +74,8 @@ public class Team {
         this.teamName = name;
         this.money = money;
         this.decisionBet = new DecisionBet[100]; 
+         this.decisionPlace = new DecisionPlace[100]; 
+          this.decisionAction = new DecisionAction();
     }
 
     public Team() {
@@ -86,12 +88,25 @@ public class Team {
         
     }
     
+     public void addDecisionPlace (DecisionPlace decisionplace) {
+        this.decisionPlace[decisionplace.getPlaceTurn()] = new DecisionPlace(decisionplace );
+        
+    }
+     
+      public void addDecisionAction (DecisionAction decisionaction) {
+        this.decisionAction = new DecisionAction (decisionaction );
+        
+    }
    
     public void readDecisionBet() {}
     public void decideBet() {}
     public void decidePlaceTanks() {}
     public void readDecisionStatus(){}
     public void decideAction (){}
+
+    void payMoney(int price) {
+      this.money -=price;
+              }
     
     
     
