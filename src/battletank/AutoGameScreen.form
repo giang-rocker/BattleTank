@@ -7,10 +7,10 @@
       <Dimension value="[1200, 900]"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1200, 650]"/>
+      <Dimension value="[1200, 750]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1200, 650]"/>
+      <Dimension value="[1200, 750]"/>
     </Property>
   </Properties>
   <SyntheticProperties>

@@ -36,6 +36,9 @@ public class DrawBattleScreen  extends JComponent{
          g.drawImage( Asset.fire.getImage() , (game.getTeamA().getTanks()[i].getPosition().getX()-1) *CELL_UNIT,( game.getTeamA().getTanks()[i].getPosition().getY()-1) *CELL_UNIT, this);
        
             }
+            else // dead
+                   g.drawImage( Asset.dead.getImage() ,  (game.getTeamA().getTanks()[i].getPosition().getX()-1) *CELL_UNIT, (game.getTeamA().getTanks()[i].getPosition().getY()-1) *CELL_UNIT, this);
+          
             i++;
         }
      i = 0 ; 
@@ -48,6 +51,9 @@ public class DrawBattleScreen  extends JComponent{
          g.drawImage( Asset.fire.getImage() , (game.getTeamB().getTanks()[i].getPosition().getX()-1) *CELL_UNIT,( game.getTeamB().getTanks()[i].getPosition().getY()-1) *CELL_UNIT, this);
        
             }
+            else //dead
+                   g.drawImage( Asset.dead.getImage() ,  (game.getTeamB().getTanks()[i].getPosition().getX()-1) *CELL_UNIT, (game.getTeamB().getTanks()[i].getPosition().getY()-1) *CELL_UNIT, this);
+          
             i++;
         }
     
