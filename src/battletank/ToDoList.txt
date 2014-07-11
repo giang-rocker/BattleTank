@@ -1,6 +1,18 @@
-- check illigal move of team
--check attack
+- load from status file
+- generate status map
+    + teams have equal numOfTank
+    + the same tanks formation
+    + the same tanks's statistic
+
+-game
+- generate equal status map for each team
+-autoPlay ()
+-autoUpdate
+
+- check illegal move of team
+-check attack done
 - game condition
 
 -the circle life of game
-- genetic programming
+
+- genetic programming// done

@@ -5,6 +5,8 @@
  */
 package battletank;
 
+import battletank.geneticAlgorithm.Chromosome;
+import battletank.geneticAlgorithm.Population;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,7 +51,11 @@ public class Report {
     private String file_teamB_decisionAction = "";
     private String file_teamA_status = "";
     private String file_teamB_status = "";
-
+    
+    // genetic algorthm report // report population
+        private String generation_path = "";
+        
+        
     public int getMatchId() {
         return matchId;
     }
@@ -57,11 +63,14 @@ public class Report {
     public void setMatchId(int matchId) {
         this.matchId = matchId;
     }
-
+// setup path
     private void init() {
         this.current_path = Paths.get("").toAbsolutePath().toString();
         this.host_path = this.current_path + "/src/battletank/" + "Report/host/";
         this.report_path = this.current_path + "/src/battletank/" + "Report";
+        
+           // genetic algorithm report
+        generation_path = this.report_path+"/Generation";
     }
 
     public Report(int matchId) {
@@ -82,6 +91,7 @@ public class Report {
         file_teamA_status = this.teamA_part + "/" + matchId + "_status_A.txt";
         file_teamB_status = this.teamB_part + "/" + matchId + "_status_B.txt";
         
+     
 
     }
 
@@ -493,5 +503,32 @@ public class Report {
     }
     //
     
+    // report generation statistic
+    
+    public void reportGeneration (Population P) throws IOException {
+     FileInputStream is = null;
+        Scanner input = null;
+        String getLine = "";
 
+        // writer file
+        Writer writerPopulation = null;
+        String file_generation = this.generation_path + "/" + P.getGeneration()+ "th_Generation.txt";
+        File f = new File(file_generation);
+        // header
+        writerPopulation.write(  P.getGeneration() +"th GENERATION STATISTIC \n") ;
+        // write gen
+        
+        for (int i =0; i <P.getNumOfChromosome(); i ++) {
+              writerPopulation.write ("C"+i +":  " );
+            for (int j=0; j < Chromosome.numOfGen; j ++ )
+          writerPopulation.write (P.getChromosomes()[i].getGen()[j] +" " );
+            writerPopulation.write ("  FitnessValue : " + P.getChromosomes()[i].getFitnessValue() + "\n" );
+        }
+          
+        writerPopulation.write("\n BEST CHROMOSOME OF "+   P.getGeneration() +"th GENERATION  \n") ;      
+          for (int j=0; j < Chromosome.numOfGen; j ++ )
+          writerPopulation.write (P.getBestChromosome().getGen()[j] +" " );   
+       writerPopulation.write ("  FitnessValue : " + P.getBestChromosome().getFitnessValue() + "\n" );
+    }
+ 
 }

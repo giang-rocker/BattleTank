@@ -6,6 +6,8 @@
 
 package battletank;
 
+import battletank.geneticAlgorithm.Chromosome;
+
 /**
  *
  * @author Administrator
@@ -140,4 +142,6 @@ public class Team {
        return -1;
    } 
     
+   
+   
 }

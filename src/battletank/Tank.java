@@ -6,6 +6,8 @@
 
 package battletank;
 
+import battletank.geneticAlgorithm.Chromosome;
+
 /**
  *
  * @author Administrator
@@ -96,5 +98,15 @@ public class Tank {
         enemy.setAmor( Math.max(0, enemy.getAmor()-this.getDamange()) );
     
     }
+    
+    
+    
+  public boolean checkInAttackRange (Tank enemy) {
+      boolean f= false;
+      int manhattan = Math.abs( enemy.getPosition().getX() - this.getPosition().getX() ) +  Math.abs( enemy.getPosition().getY() - this.getPosition().getY() );
+      
+        return this.getAttackRange() >= manhattan;
+      
+  }
     
 }
