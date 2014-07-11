@@ -5,6 +5,7 @@
  */
 package battletank;
 
+import java.awt.Color;
 import java.awt.Label;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
@@ -23,6 +24,7 @@ public class TestForm extends javax.swing.JFrame {
      *
      */
     Game game;
+   
     String setting = new String();
     String tanksinfo = new String();
     String betreportA = new String();
@@ -33,6 +35,8 @@ public class TestForm extends javax.swing.JFrame {
     String decisionB = new String();
         String decisionActionA = new String();
     String decisionActionB = new String();
+        String tankA = new String();
+    String tankB = new String();
 
     public TestForm() {
         initComponents();
@@ -66,7 +70,6 @@ public class TestForm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtDecisionB = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         txtPlaceReportB = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
@@ -79,6 +82,12 @@ public class TestForm extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         txtDecisionActionB = new javax.swing.JTextArea();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        txtTankB = new javax.swing.JTextArea();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        txtTankA = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -135,13 +144,6 @@ public class TestForm extends javax.swing.JFrame {
         txtDecisionB.setAutoscrolls(false);
         jScrollPane6.setViewportView(txtDecisionB);
 
-        jButton2.setText("Setup");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         txtPlaceReportB.setColumns(20);
         txtPlaceReportB.setRows(5);
         txtPlaceReportB.setAutoscrolls(false);
@@ -170,125 +172,147 @@ public class TestForm extends javax.swing.JFrame {
         txtDecisionActionB.setAutoscrolls(false);
         jScrollPane10.setViewportView(txtDecisionActionB);
 
+        jLabel11.setText("Tank A");
+
+        jLabel12.setText("Tank B");
+
+        txtTankB.setColumns(20);
+        txtTankB.setRows(5);
+        txtTankB.setAutoscrolls(false);
+        jScrollPane11.setViewportView(txtTankB);
+
+        txtTankA.setColumns(20);
+        txtTankA.setRows(5);
+        txtTankA.setAutoscrolls(false);
+        jScrollPane12.setViewportView(txtTankA);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(85, 85, 85)
+                                .addComponent(jLabel1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(108, 108, 108)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(85, 85, 85)
-                                        .addComponent(jLabel1)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(108, 108, 108)
-                                        .addComponent(jLabel2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(104, 104, 104)
                                 .addComponent(jLabel3)
-                                .addGap(182, 182, 182)
+                                .addGap(148, 148, 148)
                                 .addComponent(jLabel4)
-                                .addGap(65, 65, 65))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(99, 99, 99))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(44, 44, 44)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(41, 41, 41)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1)
+                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jLabel10)
+                                            .addGap(80, 80, 80))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(93, 93, 93)
+                                                    .addComponent(jLabel5))
+                                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(0, 0, Short.MAX_VALUE))))
+                                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(108, 108, 108)
+                                .addComponent(jLabel6)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel7)
-                        .addGap(168, 168, 168)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel10)
-                            .addGap(80, 80, 80))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(93, 93, 93)
-                                    .addComponent(jLabel5))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(107, 107, 107)
-                                    .addComponent(jLabel6))
-                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(0, 0, Short.MAX_VALUE))))
-                .addContainerGap())
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(73, 73, 73)))
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(96, 96, 96)
-                        .addComponent(jButton1)
-                        .addGap(448, 448, 448))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(84, 84, 84))))
+                .addGap(77, 77, 77)
+                .addComponent(jLabel7)
+                .addGap(168, 168, 168)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(84, 84, 84))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(547, 547, 547)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4)
-                            .addComponent(jScrollPane5)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3))))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                            .addComponent(jScrollPane8))
-                        .addGap(40, 40, 40))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4))
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane4)
+                                    .addComponent(jScrollPane5))))
+                        .addGap(10, 10, 10)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
@@ -297,11 +321,29 @@ public class TestForm extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addContainerGap())))
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane11)
+                                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane8)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel11)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addGap(6, 6, 6))))
         );
 
         pack();
@@ -317,7 +359,7 @@ game = new Game(1);
        
 
         try {
-            game.getReport().readReportTank(game);
+            game.getReport().readReportTank(game);   
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TestForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -325,13 +367,29 @@ game = new Game(1);
         for (int i = 0; i < game.getSetting().getNumOfTank(); i++) {
             tanksinfo += (game.getTanks()[i].getAmor() + " " + game.getTanks()[i].getDamange() + " " + game.getTanks()[i].getAttackRange()) + "\n";
         }
-    }//GEN-LAST:event_formWindowOpened
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-
-
-    }//GEN-LAST:event_jButton2ActionPerformed
+        // first time
+         // show current statistic
+        setting = ("MATCH : " + game.getSetting().getMatchID());
+        setting += "\n" + ("TEAM A : " + game.getSetting().getNameTeamA());
+        setting += "\n" + ("TEAM B : " + game.getSetting().getNameTeamB());
+        setting += "\n" + ("NUM OF TANK : " + game.getSetting().getNumOfTank());
+        setting += "\n" + ("DEFAULT MONEY : " + game.getSetting().getDefaultMoney());
+        setting += "\n" + ("NUM OF TURN : " + game.getSetting().getNumOfTurn());
+         setting += "\n" + ("NUM OF TURN : " + game.getSetting().getNumOfTurn());
+         
+        setting += "\n\n" + ("========") + "\n\n" ;
+        setting += "\n" + ("CURRENT BET TURN : " + game.getSetting().getCurrentBetTurn());
+        setting += "\n" + ("MONEY TEAM A : " + game.getTeamA().getMoney());
+        setting += "\n" + ("MONEY TEAM B: " + game.getTeamB().getMoney());
+        setting += "\n" + ("GAME STATE : " + game.getSetting().getGameState());
+        setting += "\n" + ("CURRENT TEAM ACTION : " + game.getSetting().getCurrentTeamAction());
+        setting += "\n" + ("WINNER : " + game.getSetting().getWinner());
+           this.txtSetting.setText(setting);
+            this.txtTanksInfo.setText(tanksinfo);
+       
+           tankA = ""; tankB = "";
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -371,9 +429,10 @@ game = new Game(1);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -384,6 +443,8 @@ game = new Game(1);
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -401,6 +462,8 @@ game = new Game(1);
     private javax.swing.JTextArea txtPlaceReportA;
     private javax.swing.JTextArea txtPlaceReportB;
     private javax.swing.JTextArea txtSetting;
+    private javax.swing.JTextArea txtTankA;
+    private javax.swing.JTextArea txtTankB;
     private javax.swing.JTextArea txtTanksInfo;
     // End of variables declaration//GEN-END:variables
 
@@ -418,9 +481,11 @@ game = new Game(1);
          
         setting += "\n\n" + ("========") + "\n\n" ;
         setting += "\n" + ("CURRENT BET TURN : " + game.getSetting().getCurrentBetTurn());
-         setting += "\n" + ("MONEY TEAM A : " + game.getTeamA().getMoney());
-          setting += "\n" + ("MONEY TEAM B: " + game.getTeamB().getMoney());
+        setting += "\n" + ("MONEY TEAM A : " + game.getTeamA().getMoney());
+        setting += "\n" + ("MONEY TEAM B: " + game.getTeamB().getMoney());
+        setting += "\n" + ("GAME STATE : " + game.getSetting().getGameState());
         setting += "\n" + ("CURRENT TEAM ACTION : " + game.getSetting().getCurrentTeamAction());
+        setting += "\n" + ("WINNER : " + game.getSetting().getWinner());
         
         betreportA = "TEAM A HISTORY BET\n";
         // show teams's history decision
@@ -436,7 +501,9 @@ game = new Game(1);
         // show teams's decisions
         decisionA = game.getTeamA().getDecisiontBet()[game.getSetting().getCurrentBetTurn() - 1].getPrice() + "";
         decisionB = game.getTeamB().getDecisiontBet()[game.getSetting().getCurrentBetTurn() - 1].getPrice() + "";
-        
+       
+        //show placcing decision of teeams
+       try{  
         int i = 0 ;
         placereportA= game.getTeamA().getTeamName()+"\n";
         
@@ -455,42 +522,37 @@ game = new Game(1);
             placereportB +=" ,  " + game.getTeamB().getDecisionPlace()[i].getPosition().getY()  +")\n"; 
             i++;
         }
+         }
+       catch(Exception ex) {} 
+       
+       if ( game.getSetting().getGameState()== Setting.GAME_STATE.ACTION ) {
+            BattleScreen bg = new BattleScreen(this.game);
+        bg.setVisible(true);
+       
+       }
+       // set tank info
+       tankA="";
+       for (int i =0; i < game.getTeamA().getNumOfTank(); i ++)
+           tankA += (game.getTeamA().getTanks()[i].getAmor() + " " + game.getTeamA().getTanks()[i].getDamange() + " " + game.getTeamA().getTanks()[i].getAttackRange()) + "\n\n";
+        tankB="";
+       for (int  i =0; i < game.getTeamB().getNumOfTank(); i ++)
+           tankB += (game.getTeamB().getTanks()[i].getAmor() + " " + game.getTeamB().getTanks()[i].getDamange() + " " + game.getTeamB().getTanks()[i].getAttackRange()) + "\n\n";
         
-        try{
-        if (game.getSetting().getGameState()==Setting.GAME_STATE.ACTION){
-        // show action decision of each team
-        // team A
-            if (game.getSetting().getCurrentTeamAction()=="B"){
-        decisionActionB = "";
-        decisionActionA = "COMMAND :";
-        decisionActionA += game.getTeamA().getDecisionAction().getCommand() + "\n";
-        decisionActionA += "SOURCE : ( "  + game.getTeamA().getDecisionAction().getSource().getX() + " , " + game.getTeamA().getDecisionAction().getSource().getY() +") \n";
-        decisionActionA += "DESTINATION : ( "  + game.getTeamA().getDecisionAction().getDestination().getX() + " , " + game.getTeamA().getDecisionAction().getDestination().getY() +") \n";
-            }
-              if (game.getSetting().getCurrentTeamAction()=="A"){
-         // team B
-        decisionActionA = "";
-        decisionActionB = "COMMAND :";
-        decisionActionB += game.getTeamB().getDecisionAction().getCommand() + "\n";
-        decisionActionB += "SOURCE : ( "  + game.getTeamB().getDecisionAction().getSource().getX() + " , " + game.getTeamB().getDecisionAction().getSource().getY() +") \n";
-        decisionActionB += "DESTINATION : ( "  + game.getTeamB().getDecisionAction().getDestination().getX() + " , " + game.getTeamB().getDecisionAction().getDestination().getY() +") \n";
-              }
-              }
-        }
-        catch(Exception ex) {}
-        
+       
         this.txtSetting.setText(setting);
-        this.txtTanksInfo.setText(tanksinfo);
+       
         this.txtDecisionA.setText(decisionA);
         this.txtDecisionB.setText(decisionB);
         this.txtBetReportA.setText(betreportA);
         this.txtBetReportB.setText(betreportB);
         this.txtPlaceReportA.setText(placereportA);
         this.txtPlaceReportB.setText(placereportB);
+        this.txtTankA.setText(tankA);
+        this.txtTankB.setText(tankB);
         
-        this.txtDecisionActionA.setText(decisionActionA);
-        this.txtDecisionActionB.setText(decisionActionB);
-
+      
+      
+    
     }
 
 }

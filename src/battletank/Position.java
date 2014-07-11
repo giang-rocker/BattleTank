@@ -50,4 +50,9 @@ public class Position {
         this.setY(y);
     }
 
+    public boolean compare (Position X) {
+    
+        return ( this.getX() == X.getX() && this.getY() == X.getY() );
+    }
+    
 }

@@ -6,13 +6,31 @@
 
 package battletank;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author Administrator
  */
 public  class Asset {
-    public static String path_Asset = ""; 
+      public static  String path_asset = Paths.get("").toAbsolutePath().toString()+"/src/battletank/" + "Asset/";
     
-    String path_board = "" ;
-    
+    // directory
+     public static String path_board = path_asset+"board.jpg" ;
+         public static String path_board_lg = path_asset+"boardlg.png" ;
+     public static String path_tankA = path_asset+"tankA.png" ;
+       public static String path_tankB = path_asset+"tankB.png" ;
+    // image
+   
+     public static MyImage board = new MyImage(path_board);
+       public static MyImage boardlg = new MyImage(path_board_lg);
+     public static MyImage tankA = new MyImage(path_tankA);
+      public static MyImage tankB = new MyImage(path_tankB);
 }

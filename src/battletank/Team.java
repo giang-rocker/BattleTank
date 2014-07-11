@@ -14,8 +14,9 @@ public class Team {
     
     private String teamName;
     int money;
+    int point;
+    int numOfTank;
     Tank [] tanks; // Information of Tanks of player
-    Tank[] enemyTanks ; //Information of Enemy's Tanks
     DecisionBet[] decisionBet; // information of bets of Player
     DecisionBet[] enemyDecisionBet; // information of Enemy's bets
     DecisionPlace[] decisionPlace;  // information of Enemy's
@@ -70,12 +71,31 @@ public class Team {
         this.decisionAction = decisionAction;
     }
 
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public int getNumOfTank() {
+        return numOfTank;
+    }
+
+    public void setNumOfTank(int numOfTank) {
+        this.numOfTank = numOfTank;
+    }
+
     public Team(int money,String name) {
         this.teamName = name;
         this.money = money;
+        this.numOfTank= 0;
+        this.point=0;
         this.decisionBet = new DecisionBet[100]; 
          this.decisionPlace = new DecisionPlace[100]; 
           this.decisionAction = new DecisionAction();
+         this.tanks = new Tank[100];
     }
 
     public Team() {
@@ -97,6 +117,11 @@ public class Team {
         this.decisionAction = new DecisionAction (decisionaction );
         
     }
+      
+      public void addTank (Tank T) {
+          this.tanks[numOfTank] = new Tank(T);
+          this.numOfTank++;
+      }
    
     public void readDecisionBet() {}
     public void decideBet() {}
@@ -108,6 +133,11 @@ public class Team {
       this.money -=price;
               }
     
-    
+   public int findTankByPosition (Position X) {
+       for (int i =0; i < this.numOfTank; i ++)
+           if ( this.getTanks()[i].getPosition().compare(X) ) return i;
+   
+       return -1;
+   } 
     
 }

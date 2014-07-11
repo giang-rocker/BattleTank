@@ -16,10 +16,7 @@ public class Setting {
         BET, PLACE, ACTION, FINISH
     };
 
-    public static enum TEAM {
-
-        A, B
-    };
+ 
 
     public GAME_STATE gameState;
 
@@ -36,7 +33,8 @@ public class Setting {
     private String nameTeamA;
     private String nameTeamB;
     private String currentTeamAction;
-
+    private String Winner;
+    
     public String getNameTeamA() {
         return nameTeamA;
     }
@@ -133,6 +131,16 @@ public class Setting {
         this.currentTeamAction = currentTeamAction;
     }
 
+    public String getWinner() {
+        return Winner;
+    }
+
+    public void setWinner(String Winner) {
+        this.Winner = Winner;
+    }
+
+    
+    
     public Setting(int numOfTurn, int currentTurn, int currentBetTurn, int numOfTank, int defaultMoney, int defaultPoint, int MatchID, String nameTeamA, String nameTeamB) {
         this.numOfTurn = numOfTurn;
         this.currentTurn = currentTurn;

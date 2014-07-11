@@ -1,0 +1,6 @@
+- check illigal move of team
+-check attack
+- game condition
+
+-the circle life of game
+- genetic programming

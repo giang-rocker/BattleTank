@@ -76,13 +76,25 @@ public class Tank {
         this.attackRange = attackRange;
         this.price = price;
     }
+    
+    public Tank (Tank t ) {
+       this.position = new Position(t.getPosition());
+        this.armor = t.armor;
+        this.damange = t.damange;
+        this.attackRange = t.attackRange;
+    }
 
     public Tank(int armor, int damange, int attackRange) {
+        this.position = new Position(0,0);
         this.armor = armor;
         this.damange = damange;
         this.attackRange = attackRange;
     }
     
+    public void attack ( Tank enemy ) {
     
+        enemy.setAmor( Math.max(0, enemy.getAmor()-this.getDamange()) );
+    
+    }
     
 }

@@ -47,6 +47,8 @@ public class Report {
     private String file_teamB_decisionPlace = "";
     private String file_teamA_decisionAction = "";
     private String file_teamB_decisionAction = "";
+    private String file_teamA_status = "";
+    private String file_teamB_status = "";
 
     public int getMatchId() {
         return matchId;
@@ -77,6 +79,9 @@ public class Report {
         file_teamB_decisionPlace = this.teamB_part + "/" + matchId + "_decision_place_B.txt";
         file_teamA_decisionAction = this.teamA_part + "/" + matchId + "_decision_action_A.txt";
         file_teamB_decisionAction = this.teamB_part + "/" + matchId + "_decision_action_B.txt";
+        file_teamA_status = this.teamA_part + "/" + matchId + "_status_A.txt";
+        file_teamB_status = this.teamB_part + "/" + matchId + "_status_B.txt";
+        
 
     }
 
@@ -317,13 +322,109 @@ public class Report {
     }
 
     // read status map's info
-    public void readReportStatus() {
+    // load data from report file
+    public void readReportStatus(Game game) {
+        
+        
     }
 
     // generate file status for each team
-    public void updateTeamReportStatus() {
+    public void generateReportStatus(Game game) throws IOException {
+      
+        
     }
 
+    
+    // update Status Report of each team
+    public void updateReportStatus(Game game) throws IOException {
+        
+         // input variable
+        FileInputStream is = null;
+        Scanner input = null;
+        String getLine = "";
+
+        // writer file
+        Writer writerTeamA = null;
+        Writer writerTeamB = null;
+        // Update bet file for team A
+      
+        File f = new File(this.file_teamA_status);
+        if (f.exists() && !f.isDirectory()) {
+            // team A
+            writerTeamA = new BufferedWriter(new FileWriter(new File(file_teamA_status)));
+            // write bet report team A
+            // insert team Name of each team
+            writerTeamA.write(game.getSetting().getNameTeamA() + "\n");
+          // insert point
+            writerTeamA.write(game.getTeamA().getPoint()+ "\n");
+           // insert numOfTank
+            int numOfTank = game.getTeamA().getNumOfTank();
+            writerTeamA.write(numOfTank + "\n");
+          // write tank info
+            for (int i =0; i < numOfTank; i ++) {
+                writerTeamA.write (  game.getTeamA().getTanks()[i].getAmor() + " " + game.getTeamA().getTanks()[i].getDamange()+" " +game.getTeamA().getTanks()[i].getAttackRange()+" ");
+                 writerTeamA.write (  game.getTeamA().getTanks()[i].getPosition().getX()+" "+ game.getTeamA().getTanks()[i].getPosition().getY()+"\n" );
+            }
+                
+            // team B
+            
+            // insert team Name team V
+            writerTeamA.write(game.getSetting().getNameTeamB() + "\n");
+          // insert point
+            writerTeamA.write(game.getTeamB().getPoint()+ "\n");
+           // insert numOfTank
+              numOfTank = game.getTeamB(). getNumOfTank();
+            writerTeamA.write(numOfTank + "\n");
+          // write tank info
+            for (int i =0; i < numOfTank; i ++) {
+                writerTeamA.write (  game.getTeamB().getTanks()[i].getAmor() + " " + game.getTeamB().getTanks()[i].getDamange()+" "+ game.getTeamB().getTanks()[i].getAttackRange()+" ");
+                 writerTeamA.write (  game.getTeamB().getTanks()[i].getPosition().getX()+" "+ game.getTeamB().getTanks()[i].getPosition().getY()+"\n" );
+            }
+            
+             writerTeamA.close();
+         
+        }
+        
+         f = new File(this.file_teamB_status);
+        if (f.exists() && !f.isDirectory()) {
+            // team B
+            writerTeamB = new BufferedWriter(new FileWriter(new File(file_teamB_status)));
+            // write bet report team A
+            // insert team Name of each team
+            writerTeamB.write(game.getSetting().getNameTeamB() + "\n");
+          // insert point
+            writerTeamB.write(game.getTeamB().getPoint()+ "\n");
+           // insert numOfTank
+            int numOfTank = game.getTeamB().getNumOfTank();
+            writerTeamB.write(numOfTank + "\n");
+          // write tank info
+            for (int i =0; i < numOfTank; i ++) {
+                writerTeamB.write (  game.getTeamB().getTanks()[i].getAmor() + " " + game.getTeamB().getTanks()[i].getDamange()+" "+ game.getTeamB().getTanks()[i].getAttackRange()+" ");
+                 writerTeamB.write (  game.getTeamB().getTanks()[i].getPosition().getX()+" "+ game.getTeamB().getTanks()[i].getPosition().getY()+"\n" );
+            }
+                
+            // team A
+            
+            // insert team Name team A
+            writerTeamB.write(game.getSetting().getNameTeamA() + "\n");
+          // insert point
+            writerTeamB.write(game.getTeamA().getPoint()+ "\n");
+           // insert numOfTank
+              numOfTank = game.getTeamA().getNumOfTank();
+            writerTeamB.write(numOfTank + "\n");
+          // write tank info
+            for (int i =0; i < numOfTank; i ++) {
+                writerTeamB.write (  game.getTeamA().getTanks()[i].getAmor() + " " + game.getTeamA().getTanks()[i].getDamange()+" "+  game.getTeamA().getTanks()[i].getAttackRange()+" ");
+                 writerTeamB.write (  game.getTeamA().getTanks()[i].getPosition().getX()+" "+ game.getTeamA().getTanks()[i].getPosition().getY()+"\n" );
+            }
+            
+             writerTeamB.close();
+           
+        // file of Team B
+        
+        }
+        
+    }
     // read teams's action decision
     public void readTeamActionDecision(Game game, String Team) {
 
@@ -390,9 +491,7 @@ public class Report {
         }
 
     }
-
-    // update Status Report of host
-    public void updateReportStatus() {
-    }
+    //
+    
 
 }

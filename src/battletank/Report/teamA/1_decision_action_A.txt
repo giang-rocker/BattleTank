@@ -1,11 +1,3 @@
 CTU
-MOVE
-2 2 2 3
-
-/*
-file's structure
-name of team
-ACTION COMMAND : MOVE or FIGHT
-source coordinates, destination coordinates
-
-*/
+FIGHT
+2 3 2 8
