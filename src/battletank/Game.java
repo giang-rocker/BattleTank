@@ -251,7 +251,7 @@ public class Game {
                 // find taget
                 int enemyTarget = this.getTeamB().findTankByPosition(this.getTeamA().getDecisionAction().getDestination());
                 // increase point
-                this.getTeamA().setPoint(Math.min(this.getTeamA().getTanks()[selectedTank].getDamange(), this.getTeamB().getTanks()[enemyTarget].getAmor()));
+                this.getTeamA().setPoint(this.getTeamA().getPoint()+ Math.min(this.getTeamA().getTanks()[selectedTank].getDamange(), this.getTeamB().getTanks()[enemyTarget].getAmor()));
                 // update tank status
                 this.getTeamA().getTanks()[selectedTank].attack(this.getTeamB().getTanks()[enemyTarget]);
             } else if ((command.equals("MOVE"))) {
@@ -265,7 +265,7 @@ public class Game {
                 // find taget
                 int enemyTarget = this.getTeamA().findTankByPosition(this.getTeamB().getDecisionAction().getDestination());
                 // increase point
-                this.getTeamB().setPoint(Math.min(this.getTeamB().getTanks()[selectedTank].getDamange(), this.getTeamA().getTanks()[enemyTarget].getAmor()));
+                this.getTeamB().setPoint(this.getTeamB().getPoint()+Math.min(this.getTeamB().getTanks()[selectedTank].getDamange(), this.getTeamA().getTanks()[enemyTarget].getAmor()));
                 // update tank status
                 this.getTeamB().getTanks()[selectedTank].attack(this.getTeamA().getTanks()[enemyTarget]);
             } else if((command.equals("MOVE"))){

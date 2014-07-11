@@ -40,7 +40,7 @@ public class Evaluation {
   
        
        value = valueA - valueB + valueInCheckB - valueInCheckA;
-       System.out.println("value "  + value);
+      // System.out.println("value "  + value);
        return value;
    }
     

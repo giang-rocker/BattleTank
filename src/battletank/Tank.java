@@ -23,6 +23,15 @@ public class Tank {
     int damange;
     int attackRange;
     int price;
+    boolean wasAttacked;
+
+    public boolean isWasAttacked() {
+        return wasAttacked;
+    }
+
+    public void setWasAttacked(boolean wasAttacked) {
+        this.wasAttacked = wasAttacked;
+    }
 
      public int getTankID() {
         return tankID;
@@ -86,6 +95,7 @@ public class Tank {
         this.armor = t.armor;
         this.damange = t.damange;
         this.attackRange = t.attackRange;
+        this.wasAttacked  = t.wasAttacked;
     }
 
     public Tank(int armor, int damange, int attackRange) {
@@ -93,6 +103,7 @@ public class Tank {
         this.armor = armor;
         this.damange = damange;
         this.attackRange = attackRange;
+        this.wasAttacked = false;
     }
     
     public Tank(int armor, int damange, int attackRange, Position P) {
@@ -100,10 +111,12 @@ public class Tank {
         this.armor = armor;
         this.damange = damange;
         this.attackRange = attackRange;
+        this.wasAttacked = false;
     }
     public void attack ( Tank enemy ) {
     
         enemy.setAmor( Math.max(0, enemy.getAmor()-this.getDamange()) );
+        enemy.setWasAttacked( true);
     
     }
     
