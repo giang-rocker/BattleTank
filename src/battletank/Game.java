@@ -248,7 +248,7 @@ public class Game {
             // find source
             int selectedTank = this.getTeamA().findTankByPosition(this.getTeamA().getDecisionAction().source);
 
-            if ((command.equals("FIGHT"))) {
+            if ((command.equals("ATTACK"))) {
                 // find taget
                 int enemyTarget = this.getTeamB().findTankByPosition(this.getTeamA().getDecisionAction().getDestination());
                 // increase point
@@ -259,14 +259,13 @@ public class Game {
                 this.getTeamA().getTanks()[selectedTank].setPosition(this.getTeamA().getDecisionAction().getDestination());
                 System.out.println( this.getTeamA().getDecisionAction().getDestination().getX() );
             }
-            else System.out.println("FAIL COMMAND");
-        } else { // team B
+         } else { // team B
             String command = this.getTeamB().getDecisionAction().getCommand();
 
             // find source
             int selectedTank = this.getTeamB().findTankByPosition(this.getTeamB().getDecisionAction().source);
 
-            if((command.equals("FIGHT"))) {
+            if((command.equals("ATTACK"))) {
                 // find taget
                 int enemyTarget = this.getTeamA().findTankByPosition(this.getTeamB().getDecisionAction().getDestination());
                 // increase point

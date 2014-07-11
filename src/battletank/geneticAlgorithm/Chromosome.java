@@ -72,7 +72,7 @@ public class Chromosome {
         // lai ghep 2 nhiem sac the
         public void crossOver ( Chromosome X ) {
             Random R = new Random();
-            int index = R.nextInt( Chromosome.numOfGen -1);
+            int index = R.nextInt( Chromosome.numOfGen-1 )+1;
             
             Chromosome temp = new Chromosome();
             temp.clone(X);
@@ -88,9 +88,9 @@ public class Chromosome {
         
         public void mutation(int rangeOfValue){
               Random R = new Random();
-            int index = R.nextInt( Chromosome.numOfGen)-1;
+            int index = R.nextInt( Chromosome.numOfGen)+1;
             
-            this.setGen( R.nextInt(rangeOfValue) , index);
+            this.setGen( R.nextInt(rangeOfValue)+1 , index);
             
             
         }

@@ -55,4 +55,9 @@ public class Position {
         return ( this.getX() == X.getX() && this.getY() == X.getY() );
     }
     
+    public boolean inBound (int m,int n ) {
+    
+    return (this.getX()>0 && this.getX()<=m && this.getY()>0 && this.getY()<=n );
+    }
+    
 }

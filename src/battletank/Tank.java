@@ -13,6 +13,8 @@ import battletank.geneticAlgorithm.Chromosome;
  * @author Administrator
  */
 public class Tank {
+    
+    public static int rangeOfValue = 8;
     int tankID;
 
    
@@ -93,13 +95,21 @@ public class Tank {
         this.attackRange = attackRange;
     }
     
+    public Tank(int armor, int damange, int attackRange, Position P) {
+        this.position = new Position(P);
+        this.armor = armor;
+        this.damange = damange;
+        this.attackRange = attackRange;
+    }
     public void attack ( Tank enemy ) {
     
         enemy.setAmor( Math.max(0, enemy.getAmor()-this.getDamange()) );
     
     }
     
-    
+    public boolean isAlive () {
+    return this.armor >0;
+    }
     
   public boolean checkInAttackRange (Tank enemy) {
       boolean f= false;

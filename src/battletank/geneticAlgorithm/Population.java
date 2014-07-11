@@ -75,15 +75,18 @@ public class Population {
 
     public Population ( int numOfChromosome ) {
         this.numOfChromosome = numOfChromosome;
+        this.chromosomes = new Chromosome[numOfChromosome];
         this.generation = 0;
     } 
     
    public void generatePopulation ( ) {
        Random R = new Random();
        
-       for (int i =0; i < this.numOfChromosome; i++)
+       for (int i =0; i < this.numOfChromosome; i++){
+           chromosomes[i] = new Chromosome();
          for (int j=0; j  < Chromosome.numOfGen; j ++)
-              chromosomes[i].setGen( R.nextInt(this.rangeOfValue) , j);
+              chromosomes[i].setGen( R.nextInt(this.rangeOfValue)+1 , j);
+       }
            
        
    } 
@@ -118,8 +121,8 @@ public class Population {
           Random R = new Random();
           int c1, c2;
           do {
-              c1 = R.nextInt(numOfGoodChromosome)-1;
-              c2 = R.nextInt(numOfGoodChromosome)-1;
+              c1 = R.nextInt(numOfGoodChromosome);
+              c2 = R.nextInt(numOfGoodChromosome);
           }
           while ( check[c1] || check[c2] );
           
@@ -132,7 +135,7 @@ public class Population {
    public void mutation() {
   Random R = new Random();
        for (int i =0; i <numOfGoodChromosome; i++)
-           if ( R.nextInt(100) <  this.mutationProportion ) chromosomes[i].mutation(Population.rangeOfValue);
+           if ( R.nextInt(101) <  this.mutationProportion ) chromosomes[i].mutation(Population.rangeOfValue);
        
   }
    
@@ -141,7 +144,7 @@ public class Population {
        
        for (int i =this.numOfGoodChromosome; i < this.numOfChromosome; i++)
          for (int j=0; j  < Chromosome.numOfGen; j ++)
-              chromosomes[i].setGen( R.nextInt(Population.rangeOfValue) , j);
+              chromosomes[i].setGen( R.nextInt(Population.rangeOfValue)+1 , j);
    
    }
     
