@@ -24,9 +24,9 @@ public  class Asset {
     
     // directory
      public static String path_board = path_asset+"board.jpg" ;
-         public static String path_board_lg = path_asset+"boardlg.png" ;
-     public static String path_tankA = path_asset+"tankA.png" ;
-       public static String path_tankB = path_asset+"tankB.png" ;
+         public static String path_board_lg = path_asset+"boardmd.png" ;
+     public static String path_tankA = path_asset+"tankAmd.png" ;
+       public static String path_tankB = path_asset+"tankBmd.png" ;
     // image
    
      public static MyImage board = new MyImage(path_board);

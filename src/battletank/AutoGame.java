@@ -7,8 +7,8 @@ package battletank;
 
 import battletank.geneticAlgorithm.Chromosome;
 import battletank.geneticAlgorithm.Population;
+import java.awt.Point;
 import java.util.Random;
- 
 
 /**
  *
@@ -17,23 +17,24 @@ import java.util.Random;
 public class AutoGame extends Game {
 
     Evaluation evaluation;
-    Chromosome C1, C2; // current Choromosome
-    Population population ;
+    int C1, C2; // current Choromosome
+    Population population;
     int numOfUsedChromome;
     boolean check[];
-    public Chromosome getC1() {
+
+    public int getC1() {
         return C1;
     }
 
-    public void setC1(Chromosome C1) {
+    public void setC1(int C1) {
         this.C1 = C1;
     }
 
-    public Chromosome getC2() {
+    public int getC2() {
         return C2;
     }
 
-    public void setC2(Chromosome C2) {
+    public void setC2(int C2) {
         this.C2 = C2;
     }
 
@@ -46,165 +47,169 @@ public class AutoGame extends Game {
     }
 
     public AutoGame() {
+        evaluation = new Evaluation();
         population = new Population(100);
         population.generatePopulation();
-        check = new boolean[ population.getNumOfChromosome() ];
-        for (int i=0; i <  population.getNumOfChromosome(); i ++)
+        check = new boolean[population.getNumOfChromosome()];
+        for (int i = 0; i < population.getNumOfChromosome(); i++) {
             check[i] = false;
-    numOfUsedChromome = 0;
-        
-    }
-    
-    
-    
-    public void generateGame(Chromosome C1, Chromosome C2) {
-        Random R = new Random();
-        int armor, damage, attackRange;
-        int x, y;
-        for (int i = 0; i < Setting.MAX_TANK / 2; i++) {
-            armor = R.nextInt(Tank.rangeOfValue) + 1;
-            damage = R.nextInt(Tank.rangeOfValue) + 1;
-            attackRange = R.nextInt(Tank.rangeOfValue) + 1;
-
-            x = R.nextInt(Game.COLUMN) + 1;
-            y = R.nextInt(Game.ROW / 2) + 1;
-
-            this.getTeamA().addTank(new Tank(armor, damage, attackRange, new Position(x, y)));
-            this.getTeamB().addTank(new Tank(armor, damage, attackRange, new Position(x, Game.ROW - y)));
         }
-        this.C1.clone(C1);
-        this.C2.clone(C2);
-        numOfUsedChromome+=2;
-        
+        numOfUsedChromome = 0;
+
     }
 
     @Override
     public void updateGame() {
         
         if (this.getSetting().getGameState() == Setting.GAME_STATE.ACTION) {
-        findBestDecisionAction();
-        }
-        else if (this.getSetting().getGameState() == Setting.GAME_STATE.FINISH) {
+            findBestDecisionAction();
+            updateStatusBoard();
+            this.getSetting().updateActionTurn();
+            
+        } else if (this.getSetting().getGameState() == Setting.GAME_STATE.FINISH) {
             // write report
             // find nextmatch
             createNextMatch();
-            if (this.numOfUsedChromome != population.getNumOfChromosome())
-            this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
+            if (this.numOfUsedChromome != population.getNumOfChromosome()) {
+                this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
+            }
         }
     }
 
-    DecisionAction findBestDecisionAction() {
+    void findBestDecisionAction() {
         DecisionAction bestDecisionAction = new DecisionAction();
         int dx[] = {0, 0, -1, 1};
         int dy[] = {1, -1, 0, 0};
-
-        Team TA = new Team();
-        TA.setTanks(this.getTeamA().getTanks());
-        Team TB = new Team();
-        TB.setTanks(this.getTeamB().getTanks());
-
+        
+        int maxVal = -999999;
+            
         if (this.getSetting().getCurrentTeamAction() == "A") {
-            int maxVal = -999999;
-            for (int i = 0; i < TA.getNumOfTank(); i++) {
-                if (TA.getTanks()[i].isAlive()) {
-                    // check each moe
+
+            maxVal = -999999;
+            for (int i = 0; i < this.getTeamA().getNumOfTank(); i++) {
+                if (this.getTeamA().getTanks()[i].isAlive()) {
+                    // check each move
                     for (int j = 0; j < 4; j++) {
-                        int x = TA.getTanks()[i].getPosition().getX() + dx[j];
-                        int y = TA.getTanks()[i].getPosition().getY() + dy[j];
+                        int x = this.getTeamA().getTanks()[i].getPosition().getX() + dx[j];
+                        int y = this.getTeamA().getTanks()[i].getPosition().getY() + dy[j];
                         Position movePosition = new Position(x, y);
-                        if (movePosition.inBound(Game.COLUMN, Game.COLUMN)) {
-                            TA.getTanks()[i].setPosition(movePosition);
-                            int currentVal = evaluation.evaluate(TA, TB, C1);
+                        Position oldPosition  = new Position ( this.getTeamA().getTanks()[i].getPosition() );
+                        if (movePosition.inBound(1,Game.COLUMN,0, Game.ROW/2) && this.getTeamA().findTankByPosition(movePosition)==-1 ) {
+                            this.getTeamA().getTanks()[i].setPosition(movePosition);
+                            int currentVal = evaluation.evaluate(this.getTeamA(), this.getTeamB(), population.getChromosomes()[C1]);
                             if (currentVal > maxVal) {
                                 maxVal = currentVal;
-                                bestDecisionAction = new DecisionAction("MOVE", this.getTeamA().getTanks()[i].getPosition(), movePosition);
+                                bestDecisionAction = new DecisionAction("MOVE", oldPosition, movePosition);
 
                             } // end of find best action
                         } // end of check in bound
+                          this.getTeamA().getTanks()[i].setPosition(oldPosition); // reset defaultvalue
                     } // end of 4 direction
-                    
-                    TA.setTanks( this.getTeamA().getTanks() ); // reset defaultvalue
+
                     //check attack
-                    for (int j =0; j < this.getTeamB().getNumOfTank(); j++) {
-                        if ( TB.getTanks()[j].isAlive() &&  ( TA.getTanks()[i].checkInAttackRange(TB.getTanks()[j])  )  ) {
-                             TA.getTanks()[i].attack(TB.getTanks()[j]);
-                             int currentVal = evaluation.evaluate(TA, TB, C1);
+                    for (int j = 0; j < this.getTeamB().getNumOfTank(); j++) {
+                        if (this.getTeamB().getTanks()[j].isAlive() && (this.getTeamA().getTanks()[i].checkInAttackRange(this.getTeamB().getTanks()[j]))) {
+                            Tank oldTank = new Tank( this.getTeamB().getTanks()[j] );
+                            this.getTeamA().getTanks()[i].attack(this.getTeamB().getTanks()[j]);
+                            int currentVal = evaluation.evaluate(this.getTeamA(), this.getTeamB(), population.getChromosomes()[C1]);
                             if (currentVal > maxVal) {
                                 maxVal = currentVal;
-                                bestDecisionAction = new DecisionAction("ATTACK", TA.getTanks()[i].getPosition(), TB.getTanks()[j].getPosition());
+                                bestDecisionAction = new DecisionAction("ATTACK", this.getTeamA().getTanks()[i].getPosition(), this.getTeamB().getTanks()[j].getPosition());
 
                             } // end of find best action
-                             
-                             }
+                            this.getTeamB().getTanks()[j] = new Tank(oldTank);
+                        }
                         
-                        } // check attack each tank of Team B
-                    
-              
+                    } // check attack each tank of Team B
+
                 } // check alive
-                TA.setTanks( this.getTeamA().getTanks() ); // reset defaultvalue
-                TB.setTanks( this.getTeamB().getTanks() ); // reset defaultvalue
             } // end of each Tank
-            
-           this.getTeamA().addDecisionAction(bestDecisionAction);
-            
+
+            this.getTeamA().addDecisionAction(bestDecisionAction);
+
         } // end of team A
-        else {
-         int maxVal = -999999;
-            for (int i = 0; i < TB.getNumOfTank(); i++) {
-                if (TB.getTanks()[i].isAlive()) {
+        else { // else team B
+
+            maxVal = -999999;
+            for (int i = 0; i < this.getTeamB().getNumOfTank(); i++) {
+                if (this.getTeamB().getTanks()[i].isAlive()) {
                     // check each moe
                     for (int j = 0; j < 4; j++) {
-                        int x = TB.getTanks()[i].getPosition().getX() + dx[j];
-                        int y = TB.getTanks()[i].getPosition().getY() + dy[j];
+                        int x = this.getTeamB().getTanks()[i].getPosition().getX() + dx[j];
+                        int y = this.getTeamB().getTanks()[i].getPosition().getY() + dy[j];
                         Position movePosition = new Position(x, y);
-                        if (movePosition.inBound(Game.COLUMN, Game.COLUMN)) {
-                            TB.getTanks()[i].setPosition(movePosition);
-                            int currentVal = evaluation.evaluate(TB, TA, C2);
+                        Position oldPosition  = new Position ( this.getTeamB().getTanks()[i].getPosition() );
+                        if (movePosition.inBound(1,Game.COLUMN,Game.ROW/2, Game.ROW)&& this.getTeamB().findTankByPosition(movePosition)==-1) {
+                            this.getTeamB().getTanks()[i].setPosition(movePosition);
+                            int currentVal = evaluation.evaluate(this.getTeamB(), this.getTeamA(), population.getChromosomes()[C2]);
                             if (currentVal > maxVal) {
                                 maxVal = currentVal;
-                                bestDecisionAction = new DecisionAction("MOVE", this.getTeamB().getTanks()[i].getPosition(), movePosition);
+                                bestDecisionAction = new DecisionAction("MOVE", oldPosition, movePosition);
 
                             } // end of find best action
                         } // end of check in bound
+                          this.getTeamB().getTanks()[i].setPosition(oldPosition); // reset defaultvalue
                     } // end of 4 direction
-                    
-                    TB.setTanks( this.getTeamB().getTanks() ); // reset defaultvalue
+
                     //check attack
-                    for (int j =0; j < this.getTeamA().getNumOfTank(); j++) {
-                        if ( TA.getTanks()[j].isAlive() &&  ( TB.getTanks()[i].checkInAttackRange(TA.getTanks()[j])  )  ) {
-                             TB.getTanks()[i].attack(TA.getTanks()[j]);
-                             int currentVal = evaluation.evaluate(TB, TA, C2);
+                    for (int j = 0; j < this.getTeamA().getNumOfTank(); j++) {
+                        if (this.getTeamA().getTanks()[j].isAlive() && (this.getTeamB().getTanks()[i].checkInAttackRange(this.getTeamA().getTanks()[j]))) {
+                            Tank oldTank = new Tank( this.getTeamA().getTanks()[j] );
+                            this.getTeamB().getTanks()[i].attack(this.getTeamA().getTanks()[j]);
+                            int currentVal = evaluation.evaluate(this.getTeamB(), this.getTeamA(), population.getChromosomes()[C2]);
                             if (currentVal > maxVal) {
                                 maxVal = currentVal;
-                                bestDecisionAction = new DecisionAction("ATTACK", TB.getTanks()[i].getPosition(), TA.getTanks()[j].getPosition());
+                                bestDecisionAction = new DecisionAction("ATTACK", this.getTeamB().getTanks()[i].getPosition(), this.getTeamA().getTanks()[j].getPosition());
 
                             } // end of find best action
-                             
-                             }
+                            this.getTeamA().getTanks()[j] = new Tank(oldTank);
+                        }
                         
-                        } // check attack each tank of Team B
-                    
-              
+                    } // check attack each tank of Team B
+
                 } // check alive
-                TA.setTanks( this.getTeamA().getTanks() ); // reset defaultvalue
-                TB.setTanks( this.getTeamB().getTanks() ); // reset defaultvalue
-            } // end of each Tank B
+            } // end of each Tank
 
-        this.getTeamB().addDecisionAction(bestDecisionAction);
-        } // end of if tank B
-        return bestDecisionAction;
+            this.getTeamB().addDecisionAction(bestDecisionAction);
+
+        } // end of team B
+         System.out.println("CHOSE DONE"  + maxVal);
+      
     }
-    
+
     public void createNextMatch() {
-    Random R=  new Random ();
-    int C1,C2;
-    
-    do {
-        C1 = R.nextInt(population.getNumOfChromosome());
-        C2 = R.nextInt(population.getNumOfChromosome());
-    }
-    while  ( !check[C1] || !check[C2] );
+        Random R = new Random();
+     
+        
+        do {
+            C1 = R.nextInt(population.getNumOfChromosome());
+            C2 = R.nextInt(population.getNumOfChromosome());
+        } while (check[C1]  ||  check[C2]);
 
-    generateGame( population.getChromosomes()[C1] , population.getChromosomes()[C2]);
-}
+        check[C1] = true;
+        check[C2] = true;
+
+        this.setTeamA(new Team());
+        this.setTeamB(new Team());
+
+        int armor, damage, attackRange;
+        int x, y;
+        for (int i = 0; i < Setting.MAX_TANK / 2; i++) {
+            armor = R.nextInt(Tank.rangeOfValue) + 1;
+            damage = R.nextInt(Tank.rangeOfValue) + 1;
+            attackRange = R.nextInt(Tank.rangeOfValue) + 1;
+            do {
+            x = R.nextInt(Game.COLUMN) + 1;
+            y = R.nextInt(Game.ROW / 2) + 1;
+            }
+            while ( this.getTeamA().findTankByPosition(new Position(x,y)) !=-1 );
+            this.getTeamA().addTank(new Tank(armor, damage, attackRange, new Position(x, y)));
+            this.getTeamB().addTank(new Tank(armor, damage, attackRange, new Position(x, Game.ROW - y+1)));
+        }
+
+        numOfUsedChromome += 2;
+        this.getSetting().setCurrentTeamAction("A");
+        this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
+  
+    }
 }

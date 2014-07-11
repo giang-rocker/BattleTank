@@ -16,7 +16,7 @@ import javax.swing.JComponent;
 public class DrawBattleScreen  extends JComponent{
     Game game;
     
-    public static int CELL_UNIT = 100;
+    public static int CELL_UNIT = 75;
     
     public DrawBattleScreen (Game game) {
     this.game = game;
@@ -28,14 +28,14 @@ public class DrawBattleScreen  extends JComponent{
      int i = 0 ; 
         
         // read teams's decision place
-        while ( game.getTeamA().getTanks()[i]!=null ) {
+        while ( game.getTeamA().getTanks()[i]!=null && game.getTeamA().getTanks()[i].isAlive() ) {
         g.drawImage( Asset.tankA.getImage() , (game.getTeamA().getTanks()[i].getPosition().getX()-1) *CELL_UNIT,( game.getTeamA().getTanks()[i].getPosition().getY()-1) *CELL_UNIT, this);
             i++;
         }
      i = 0 ; 
         
         // read teams's decision place
-        while ( game.getTeamB().getTanks()[i]!=null ) {
+        while ( game.getTeamB().getTanks()[i]!=null && game.getTeamB().getTanks()[i].isAlive() ) {
         g.drawImage( Asset.tankB.getImage() ,  (game.getTeamB().getTanks()[i].getPosition().getX()-1) *CELL_UNIT, (game.getTeamB().getTanks()[i].getPosition().getY()-1) *CELL_UNIT, this);
             i++;
         }

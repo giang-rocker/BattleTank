@@ -59,5 +59,8 @@ public class Position {
     
     return (this.getX()>0 && this.getX()<=m && this.getY()>0 && this.getY()<=n );
     }
+     public boolean inBound (int minX, int maxX,int minY,int maxY  ) {
     
+    return (this.getX()>=minX && this.getX()<=maxX && this.getY()>=minY && this.getY()<=maxY );
+    }
 }

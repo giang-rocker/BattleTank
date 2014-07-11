@@ -101,6 +101,12 @@ public class Team {
     }
 
     public Team() {
+        this.numOfTank= 0;
+        this.point=0;
+        this.decisionBet = new DecisionBet[100]; 
+         this.decisionPlace = new DecisionPlace[100]; 
+          this.decisionAction = new DecisionAction();
+         this.tanks = new Tank[100];
     }
     
     

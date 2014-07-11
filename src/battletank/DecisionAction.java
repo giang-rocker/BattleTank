@@ -36,7 +36,7 @@ public class DecisionAction {
     }
 
     public void setDestination(Position destination) {
-        this.destination = destination;
+        this.destination =   destination;
     }
 
     public DecisionAction(String command, Position source, Position destination) {
@@ -52,6 +52,9 @@ public class DecisionAction {
     }
     
     public DecisionAction() {
+        this.source = new Position(0,0);
+        this.destination = new Position(0,0);
+        
     }
     
     

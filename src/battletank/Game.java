@@ -244,8 +244,7 @@ public class Game {
         if (this.getSetting().getCurrentTeamAction() == "A") {
             
             String command = this.getTeamA().getDecisionAction().getCommand();
-            System.out.println(command + command.length());
-            // find source
+             // find source
             int selectedTank = this.getTeamA().findTankByPosition(this.getTeamA().getDecisionAction().source);
 
             if ((command.equals("ATTACK"))) {
@@ -257,14 +256,11 @@ public class Game {
                 this.getTeamA().getTanks()[selectedTank].attack(this.getTeamB().getTanks()[enemyTarget]);
             } else if ((command.equals("MOVE"))) {
                 this.getTeamA().getTanks()[selectedTank].setPosition(this.getTeamA().getDecisionAction().getDestination());
-                System.out.println( this.getTeamA().getDecisionAction().getDestination().getX() );
-            }
+             }
          } else { // team B
             String command = this.getTeamB().getDecisionAction().getCommand();
-
-            // find source
+         // find source
             int selectedTank = this.getTeamB().findTankByPosition(this.getTeamB().getDecisionAction().source);
-
             if((command.equals("ATTACK"))) {
                 // find taget
                 int enemyTarget = this.getTeamA().findTankByPosition(this.getTeamB().getDecisionAction().getDestination());
