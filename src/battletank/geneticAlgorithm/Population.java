@@ -126,6 +126,7 @@ public class Population {
           }
           while ( check[c1] || check[c2] );
           
+          check[c1]= true; check[c2]= true;
           chromosomes[c1].crossOver( chromosomes[c2]);
       }
    
@@ -135,7 +136,7 @@ public class Population {
    public void mutation() {
   Random R = new Random();
        for (int i =0; i <numOfGoodChromosome; i++)
-           if ( R.nextInt(101) <  this.mutationProportion ) chromosomes[i].mutation(Population.rangeOfValue);
+           if ( R.nextInt(100) <  this.mutationProportion ) chromosomes[i].mutation(Population.rangeOfValue);
        
   }
    
@@ -145,8 +146,11 @@ public class Population {
        for (int i =this.numOfGoodChromosome; i < this.numOfChromosome; i++)
          for (int j=0; j  < Chromosome.numOfGen; j ++)
               chromosomes[i].setGen( R.nextInt(Population.rangeOfValue)+1 , j);
-   
+       
+       
+      
    }
+   
     
    public void evolution () {
        // selection parent
@@ -159,5 +163,9 @@ public class Population {
        addNewChromosomeToPopulation();
        
        this.generation ++;
+       
+       // reset fitness value
+       for (int i =0; i < numOfChromosome ; i ++)
+           chromosomes[i].setFitnessValue(0);
    }
 }

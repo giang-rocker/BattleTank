@@ -23,11 +23,11 @@ public class AutoGameScreen extends javax.swing.JFrame {
     /**
      * Creates new form AutoGameScreen
      */
-    AutoGame game;
+      public AutoGame game;
     
-    DrawBattleScreen battleScreen;
+      DrawBattleScreen battleScreen;
     
-    Population population ;
+      Population population ;
     
     
     
@@ -65,7 +65,7 @@ public class AutoGameScreen extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtPointInfo = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
-        txtTanknInfo = new javax.swing.JTextArea();
+        txtTournamentInfo = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 900));
@@ -109,9 +109,12 @@ public class AutoGameScreen extends javax.swing.JFrame {
         txtPointInfo.setRows(5);
         jScrollPane3.setViewportView(txtPointInfo);
 
-        txtTanknInfo.setColumns(20);
-        txtTanknInfo.setRows(5);
-        jScrollPane4.setViewportView(txtTanknInfo);
+        txtTournamentInfo.setColumns(20);
+        txtTournamentInfo.setLineWrap(true);
+        txtTournamentInfo.setRows(5);
+        txtTournamentInfo.setWrapStyleWord(true);
+        txtTournamentInfo.setPreferredSize(new java.awt.Dimension(164, 650));
+        jScrollPane4.setViewportView(txtTournamentInfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,7 +131,7 @@ public class AutoGameScreen extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 720, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 762, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -145,7 +148,8 @@ public class AutoGameScreen extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -171,8 +175,7 @@ public class AutoGameScreen extends javax.swing.JFrame {
    chromosomeInfo+= "\nCHROMOSOME B : "+game.getC2()+"\n";
    for (int i =0; i < Chromosome.numOfGen; i ++)
    chromosomeInfo+= game.getPopulation().getChromosomes()[game.getC2()].getGen(i) + " ";
-      this.txtChromosomeInfo.setText(chromosomeInfo);
-  
+      this.txtChromosomeInfo.setText(chromosomeInfo);     
       
     }//GEN-LAST:event_formWindowOpened
 
@@ -189,41 +192,8 @@ public class AutoGameScreen extends javax.swing.JFrame {
         System.out.println("Click!");        // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AutoGameScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AutoGameScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AutoGameScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AutoGameScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AutoGameScreen().setVisible(true);
-                   System.out.println("DONE");
-            }
-        });
-    }
+ 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
@@ -234,15 +204,16 @@ public class AutoGameScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea txtActionInfo;
     private javax.swing.JTextArea txtChromosomeInfo;
     private javax.swing.JTextArea txtPointInfo;
-    private javax.swing.JTextArea txtTanknInfo;
+    private javax.swing.JTextArea txtTournamentInfo;
     // End of variables declaration//GEN-END:variables
 
-    String actionInfo="";
-    String chromosomeInfo="";
-    String pointInfo = "";
-    String tankInfo = "";
-void update () {
-    game.updateAutoGame();
+      String actionInfo="";
+      String chromosomeInfo="";
+      String pointInfo = "";
+      String tournamentInfo = "";
+  public void update () {
+    
+      game.updateAutoGame();
      battleScreen.update(game);
      battleScreen.validate();
     
@@ -261,27 +232,28 @@ void update () {
    
    }
    
-   tankInfo = "";
-   tankInfo += "TANKS's TEAM A\n";
-   for (int i =0; i < game.getTeamA().numOfTank; i ++)
-      tankInfo+= game.getTeamA().getTanks()[i].getAmor() +" "+ game.getTeamA().getTanks()[i].getDamange() +" "+ game.getTeamA().getTanks()[i].getAttackRange()+" "+
-                 game.getTeamA().getTanks()[i].getPosition().getX() +" " +game.getTeamA().getTanks()[i].getPosition().getY()+"\n";
+   tournamentInfo = "TOURNAMENT STATISTIC\n";
+   for (int i =0; i < game.getPopulation().getNumOfChromosome(); i ++){
+       tournamentInfo += "C"+(i+1) +" : "; 
+       for (int j=0; j < Chromosome.numOfGen; j++)
+       tournamentInfo +=game.getPopulation().getChromosomes()[i].getGen(j) + " ";
+   tournamentInfo+=" POINT :  " + game.getPopulation().getChromosomes()[i].getFitnessValue() +"\n";
+   }
    
-   tankInfo += "TANKS's TEAM B\n";
-   for (int i =0; i < game.getTeamB().numOfTank; i ++)
-      tankInfo+= game.getTeamB().getTanks()[i].getAmor() +" "+ game.getTeamB().getTanks()[i].getDamange() +" "+ game.getTeamB().getTanks()[i].getAttackRange()+" "+
-                  + game.getTeamB().getTanks()[i].getPosition().getX() +" " +game.getTeamB().getTanks()[i].getPosition().getY()+"\n";
    
    
    pointInfo ="";
    pointInfo += "TEAM A : " + game.getTeamA().getPoint() +"\n";
    pointInfo += "TEAM B : " + game.getTeamB().getPoint() +"\n";
    pointInfo += "CURRENT TURN : " + game.getSetting().getCurrentActionTurn() +"\n";
+   pointInfo += "CURRENT GAME : " + game.getCurrentGame() +"\n";
      
      this.txtActionInfo.setText(actionInfo);
      this.txtChromosomeInfo.setText(chromosomeInfo);
      this.txtPointInfo.setText(pointInfo);
-     this.txtTanknInfo.setText(tankInfo);
+     this.txtTournamentInfo.setText(tournamentInfo);
 }
 
+       
+    
 }

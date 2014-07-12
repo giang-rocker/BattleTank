@@ -21,8 +21,9 @@ public class AutoGame extends Game {
     Population population;
     int numOfUsedChromome;
     boolean check[];
-    int currentTurn =0;
+    int currentGame =0;
     
+boolean c[][] ;
     public int getC1() {
         return C1;
     }
@@ -47,15 +48,29 @@ public class AutoGame extends Game {
         this.population = population;
     }
 
+    public int getCurrentGame() {
+        return currentGame;
+    }
+
+    public void setCurrentGame(int currentGame) {
+        this.currentGame = currentGame;
+    }
+
     public AutoGame() {
         evaluation = new Evaluation();
-        population = new Population(100);
+        population = new Population(50);
         population.generatePopulation();
         check = new boolean[population.getNumOfChromosome()];
         for (int i = 0; i < population.getNumOfChromosome(); i++) {
             check[i] = false;
         }
         numOfUsedChromome = 0;
+         c = new boolean[this.getPopulation().getNumOfChromosome()][this.getPopulation().getNumOfChromosome()];
+        // reset check board
+       for (int i =0; i < this.getPopulation().getNumOfChromosome(); i ++)
+        for (int j =0; j < this.getPopulation().getNumOfChromosome(); j ++) {
+             c[i][j] = false;
+        }
 
     }
 
@@ -83,13 +98,16 @@ public class AutoGame extends Game {
                 this.getPopulation().getChromosomes()[C1].setFitnessValue(this.getPopulation().getChromosomes()[C1].getFitnessValue() + 1);
             }
             // find nextmatch
-            createNextMatch();
+            
+          //  this.getPopulation().sortByFitnessValue();
+            
+           if (! nextTournamentMatch()) this.getSetting().setGameState(Setting.GAME_STATE.DONE); 
+           else createNextMatch();
+            
             if (this.numOfUsedChromome != population.getNumOfChromosome()) {
-                this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
+          //      this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
             }
-            else {
-            this.getPopulation().evolution();
-            }
+           
         }
     }
 
@@ -198,18 +216,19 @@ public class AutoGame extends Game {
         } // end of team B
 
     }
-
+    
     public void createNextMatch() {
+    //  random match
         Random R = new Random();
-
+/* 
         do {
             C1 = R.nextInt(population.getNumOfChromosome());
             C2 = R.nextInt(population.getNumOfChromosome());
-        } while (check[C1] || check[C2]);
+        } while (check[C1] || check[C2] || C1== C2);
 
         check[C1] = true;
         check[C2] = true;
-
+        */
         this.setTeamA(new Team());
         this.setTeamB(new Team());
 
@@ -228,6 +247,7 @@ public class AutoGame extends Game {
         }
 
         numOfUsedChromome += 2;
+        currentGame++;
         this.getSetting().setCurrentTeamAction("A");
         this.getSetting().setCurrentActionTurn(0);
         this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
@@ -238,6 +258,14 @@ public class AutoGame extends Game {
         if ( this.getSetting().getCurrentActionTurn() == Setting.MAX_ACTION_TURN ) return true;
        if ( this.getTeamA().checkOutOfTank () || this.getTeamB().checkOutOfTank() ) return true;
         
+    return false;
+    }
+    
+    boolean nextTournamentMatch () {
+    for (int i =0; i < this.getPopulation().getNumOfChromosome(); i ++)
+        for (int j =i+1; j < this.getPopulation().getNumOfChromosome(); j ++) {
+            if (!c[i][j]) { c[i][j] = true; C1=i;C2=j; return true; }
+        }
     return false;
     }
 }

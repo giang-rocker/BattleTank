@@ -13,7 +13,7 @@ public class Setting {
 
     public static enum GAME_STATE {
 
-        BET, PLACE, ACTION, FINISH
+        BET, PLACE, ACTION, FINISH, DONE
     };
 
  
