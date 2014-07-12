@@ -143,7 +143,8 @@ public class Team {
     
    public int findTankByPosition (Position X) {
        for (int i =0; i < this.numOfTank; i ++)
-           if ( this.getTanks()[i].getPosition().compare(X) ) return i;
+           //alive and exist
+           if ( this.getTanks()[i].getPosition().compare(X) && this.getTanks()[i].isAlive() ) return i;
    
        return -1;
    } 

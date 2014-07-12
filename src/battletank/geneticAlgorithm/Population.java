@@ -15,7 +15,7 @@ import java.util.Random;
 public class Population {
     static int rangeOfValue = 100;
     int numOfChromosome = 100; // num of individual in population
-    int numOfGoodChromosome = numOfChromosome/2; // num of individual in population
+    int numOfGoodChromosome = (int) (numOfChromosome*0.8)  ; // num of individual in population
     Chromosome chromosomes[]; // population
     static int mutationProportion = 10 ; //percentage 
     Chromosome bestChromosome;
@@ -87,7 +87,7 @@ public class Population {
          for (int j=0; j  < Chromosome.numOfGen; j ++)
               chromosomes[i].setGen( R.nextInt(this.rangeOfValue)+1 , j);
        }
-           
+      
        
    } 
     

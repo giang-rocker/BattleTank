@@ -52,6 +52,7 @@ public class Chromosome {
     
         public Chromosome( ) {
         this.gen = new int[numOfGen];
+        this.fitnessValue = 0;
     }
         
         public void clone ( Chromosome X ) {
