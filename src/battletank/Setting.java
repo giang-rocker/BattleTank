@@ -21,8 +21,9 @@ public class Setting {
     public GAME_STATE gameState;
 
     public static int MAX_TANK = 14;
+    public static int MAX_ACTION_TURN = 50;
     private int numOfTurn;
-    private int currentTurn;
+    private int currentActionTurn;
 
     private int currentBetTurn;
 
@@ -67,12 +68,12 @@ public class Setting {
         this.numOfTurn = numOfTurn;
     }
 
-    public int getCurrentTurn() {
-        return currentTurn;
+    public int getCurrentActionTurn() {
+        return currentActionTurn;
     }
 
-    public void setCurrentTurn(int currentTurn) {
-        this.currentTurn = currentTurn;
+    public void setCurrentActionTurn(int currentActionTurn) {
+        this.currentActionTurn = currentActionTurn;
     }
 
     public int getNumOfTank() {
@@ -141,9 +142,9 @@ public class Setting {
 
     
     
-    public Setting(int numOfTurn, int currentTurn, int currentBetTurn, int numOfTank, int defaultMoney, int defaultPoint, int MatchID, String nameTeamA, String nameTeamB) {
+    public Setting(int numOfTurn, int currentActionTurn, int currentBetTurn, int numOfTank, int defaultMoney, int defaultPoint, int MatchID, String nameTeamA, String nameTeamB) {
         this.numOfTurn = numOfTurn;
-        this.currentTurn = currentTurn;
+        this.currentActionTurn = currentActionTurn;
         this.currentBetTurn = currentBetTurn;
         this.numOfTank = numOfTank;
         this.defaultMoney = defaultMoney;
@@ -167,6 +168,7 @@ public class Setting {
     }
 
     void updateActionTurn() {
+        this.currentActionTurn ++;
         if (this.getCurrentTeamAction() == "A") {
             this.setCurrentTeamAction("B");
         } else {

@@ -68,9 +68,9 @@ public class AutoGameScreen extends javax.swing.JFrame {
         txtTanknInfo = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1200, 650));
-        setMinimumSize(new java.awt.Dimension(1200, 650));
-        setPreferredSize(new java.awt.Dimension(1200, 650));
+        setMaximumSize(new java.awt.Dimension(1200, 900));
+        setMinimumSize(new java.awt.Dimension(1200, 750));
+        setPreferredSize(new java.awt.Dimension(1200, 750));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
@@ -154,7 +154,7 @@ public class AutoGameScreen extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        
         battleScreen = new DrawBattleScreen(game);
-        battleScreen.setLocation(300, 0);
+        battleScreen.setLocation(300, 50);
         battleScreen.setSize(800, 800);
         battleScreen.setBackground(Color.white);
         battleScreen.setVisible(true);
@@ -242,7 +242,7 @@ public class AutoGameScreen extends javax.swing.JFrame {
     String pointInfo = "";
     String tankInfo = "";
 void update () {
-    game.updateGame();
+    game.updateAutoGame();
      battleScreen.update(game);
      battleScreen.validate();
     
@@ -250,14 +250,14 @@ void update () {
    if (game.getSetting().getCurrentTeamAction() == "B") {
        actionInfo = "TEAM A\n";
        actionInfo += game.getTeamA().getDecisionAction().getCommand()+"\n";
-       actionInfo += "("+game.getTeamA().getDecisionAction().getSource().getX()+","+game.getTeamA().getDecisionAction().getSource().getX()+")" ;
-       actionInfo += "("+game.getTeamA().getDecisionAction().getDestination().getX()+","+game.getTeamA().getDecisionAction().getDestination().getX()+")" ;
+       actionInfo += "("+game.getTeamA().getDecisionAction().getSource().getX()+","+game.getTeamA().getDecisionAction().getSource().getY()+")" ;
+       actionInfo += "("+game.getTeamA().getDecisionAction().getDestination().getX()+","+game.getTeamA().getDecisionAction().getDestination().getY()+")" ;
    }
    else {
        actionInfo = "TEAM B\n";
        actionInfo += game.getTeamB().getDecisionAction().getCommand()+"\n";
-       actionInfo += "("+game.getTeamB().getDecisionAction().getSource().getX()+","+game.getTeamB().getDecisionAction().getSource().getX()+")" ;
-       actionInfo += "("+game.getTeamB().getDecisionAction().getDestination().getX()+","+game.getTeamB().getDecisionAction().getDestination().getX()+")" ;
+       actionInfo += "("+game.getTeamB().getDecisionAction().getSource().getX()+","+game.getTeamB().getDecisionAction().getSource().getY()+")" ;
+       actionInfo += "("+game.getTeamB().getDecisionAction().getDestination().getX()+","+game.getTeamB().getDecisionAction().getDestination().getY()+")" ;
    
    }
    
@@ -276,6 +276,7 @@ void update () {
    pointInfo ="";
    pointInfo += "TEAM A : " + game.getTeamA().getPoint() +"\n";
    pointInfo += "TEAM B : " + game.getTeamB().getPoint() +"\n";
+   pointInfo += "CURRENT TURN : " + game.getSetting().getCurrentActionTurn() +"\n";
      
      this.txtActionInfo.setText(actionInfo);
      this.txtChromosomeInfo.setText(chromosomeInfo);

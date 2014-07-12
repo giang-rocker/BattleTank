@@ -21,7 +21,8 @@ public class AutoGame extends Game {
     Population population;
     int numOfUsedChromome;
     boolean check[];
-
+    int currentTurn =0;
+    
     public int getC1() {
         return C1;
     }
@@ -58,13 +59,16 @@ public class AutoGame extends Game {
 
     }
 
-    @Override
-    public void updateGame() {
+
+    public void updateAutoGame() {
 
         if (this.getSetting().getGameState() == Setting.GAME_STATE.ACTION) {
             findBestDecisionAction();
             updateStatusBoard();
             this.getSetting().updateActionTurn();
+
+            if (checkFinnish()) this.getSetting().setGameState( Setting.GAME_STATE.FINISH);
+            
 
         } else if (this.getSetting().getGameState() == Setting.GAME_STATE.FINISH) {
             // end of a game
@@ -101,20 +105,22 @@ public class AutoGame extends Game {
             maxVal = -999999;
             for (int i = 0; i < this.getTeamA().getNumOfTank(); i++) {
                 if (this.getTeamA().getTanks()[i].isAlive()) {
-                    // check each move
+                     // check each move
                     for (int j = 0; j < 4; j++) {
                         int x = this.getTeamA().getTanks()[i].getPosition().getX() + dx[j];
                         int y = this.getTeamA().getTanks()[i].getPosition().getY() + dy[j];
                         Position movePosition = new Position(x, y);
-                        Position oldPosition = new Position(this.getTeamA().getTanks()[i].getPosition());
-                        if (movePosition.inBound(1, Game.COLUMN, 0, Game.ROW / 2) && this.getTeamA().findTankByPosition(movePosition) == -1) {
+
+                     
+                        Position oldPosition  = new Position ( this.getTeamA().getTanks()[i].getPosition() );
+                        if (movePosition.inBound(1,Game.COLUMN,1, Game.ROW/2) && this.getTeamA().findTankByPosition(movePosition)==-1 ) {
+
                             this.getTeamA().getTanks()[i].setPosition(movePosition);
                             int currentVal = evaluation.evaluate(this.getTeamA(), this.getTeamB(), population.getChromosomes()[C1]);
                             if (currentVal > maxVal) {
                                 maxVal = currentVal;
                                 bestDecisionAction = new DecisionAction("MOVE", oldPosition, movePosition);
-
-                            } // end of find best action
+                           } // end of find best action
                         } // end of check in bound
                         this.getTeamA().getTanks()[i].setPosition(oldPosition); // reset defaultvalue
                     } // end of 4 direction
@@ -139,6 +145,8 @@ public class AutoGame extends Game {
             } // end of each Tank
 
             this.getTeamA().addDecisionAction(bestDecisionAction);
+            
+
 
         } // end of team A
         else { // else team B
@@ -151,15 +159,16 @@ public class AutoGame extends Game {
                         int x = this.getTeamB().getTanks()[i].getPosition().getX() + dx[j];
                         int y = this.getTeamB().getTanks()[i].getPosition().getY() + dy[j];
                         Position movePosition = new Position(x, y);
-                        Position oldPosition = new Position(this.getTeamB().getTanks()[i].getPosition());
-                        if (movePosition.inBound(1, Game.COLUMN, Game.ROW / 2, Game.ROW) && this.getTeamB().findTankByPosition(movePosition) == -1) {
+
+                        Position oldPosition  = new Position ( this.getTeamB().getTanks()[i].getPosition() );
+                        if (movePosition.inBound(1,Game.COLUMN,Game.ROW/2+1, Game.ROW)&& this.getTeamB().findTankByPosition(movePosition)==-1) {
+
                             this.getTeamB().getTanks()[i].setPosition(movePosition);
                             int currentVal = evaluation.evaluate(this.getTeamB(), this.getTeamA(), population.getChromosomes()[C2]);
                             if (currentVal > maxVal) {
                                 maxVal = currentVal;
                                 bestDecisionAction = new DecisionAction("MOVE", oldPosition, movePosition);
-
-                            } // end of find best action
+                               } // end of find best action
                         } // end of check in bound
                         this.getTeamB().getTanks()[i].setPosition(oldPosition); // reset defaultvalue
                     } // end of 4 direction
@@ -184,9 +193,9 @@ public class AutoGame extends Game {
             } // end of each Tank
 
             this.getTeamB().addDecisionAction(bestDecisionAction);
+           
 
         } // end of team B
-        System.out.println("CHOSE DONE" + maxVal);
 
     }
 
@@ -208,7 +217,7 @@ public class AutoGame extends Game {
         int x, y;
         for (int i = 0; i < Setting.MAX_TANK / 2; i++) {
             armor = R.nextInt(Tank.rangeOfValue) + 1;
-            damage = R.nextInt(Tank.rangeOfValue) + 1;
+            damage = R.nextInt(Tank.rangeOfValue/2) + 1;
             attackRange = R.nextInt(Tank.rangeOfValue) + 1;
             do {
                 x = R.nextInt(Game.COLUMN) + 1;
@@ -220,7 +229,15 @@ public class AutoGame extends Game {
 
         numOfUsedChromome += 2;
         this.getSetting().setCurrentTeamAction("A");
+        this.getSetting().setCurrentActionTurn(0);
         this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
 
+    }
+    
+    boolean  checkFinnish() {
+        if ( this.getSetting().getCurrentActionTurn() == Setting.MAX_ACTION_TURN ) return true;
+       if ( this.getTeamA().checkOutOfTank () || this.getTeamB().checkOutOfTank() ) return true;
+        
+    return false;
     }
 }

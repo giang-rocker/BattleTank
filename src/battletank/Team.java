@@ -147,6 +147,12 @@ public class Team {
    
        return -1;
    } 
+
+    boolean checkOutOfTank() {
+        for (int i =0; i < numOfTank; i ++ )
+            if (this.getTanks()[i].getAmor()>0) return false;
+        return true;
+    }
     
    
    
