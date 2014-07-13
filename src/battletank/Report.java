@@ -509,16 +509,19 @@ public class Report {
      FileInputStream is = null;
         Scanner input = null;
         String getLine = "";
-
+        
         // writer file
         Writer writerPopulation = null;
         String file_generation = this.generation_path + "/" + P.getGeneration()+ "th_Generation.txt";
+    
         File f = new File(file_generation);
+        writerPopulation = new BufferedWriter(new FileWriter(new File(file_generation)));
         // header
+        if (!f.exists()) f.createNewFile();
         writerPopulation.write(  P.getGeneration() +"th GENERATION STATISTIC \n") ;
         // write gen
         
-        for (int i =0; i <P.getNumOfChromosome(); i ++) {
+        for (int i =0; i <P.getNumOfChromosome(); i ++) { 
               writerPopulation.write ("C"+i +":  " );
             for (int j=0; j < Chromosome.numOfGen; j ++ )
           writerPopulation.write (P.getChromosomes()[i].getGen()[j] +" " );
@@ -528,7 +531,11 @@ public class Report {
         writerPopulation.write("\n BEST CHROMOSOME OF "+   P.getGeneration() +"th GENERATION  \n") ;      
           for (int j=0; j < Chromosome.numOfGen; j ++ )
           writerPopulation.write (P.getBestChromosome().getGen()[j] +" " );   
-       writerPopulation.write ("  FitnessValue : " + P.getBestChromosome().getFitnessValue() + "\n" );
+         writerPopulation.write ("  FitnessValue : " + P.getBestChromosome().getFitnessValue() + "\n" );
+         
+      
+         
+         writerPopulation.close();
     }
  
 }

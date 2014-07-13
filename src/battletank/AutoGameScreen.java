@@ -42,6 +42,16 @@ public class AutoGameScreen extends javax.swing.JFrame {
             Logger.getLogger(AutoGameScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setLocation(0, 0);
+       
+        this.getContentPane().setBackground(Color.BLACK);
+        
+         battleScreen = new DrawBattleScreen(game);
+        battleScreen.setLocation(300, 50);
+        battleScreen.setSize(800, 800);
+        battleScreen.setBackground(Color.white);
+        battleScreen.setVisible(true);
+        this.add(battleScreen);
+        battleScreen.validate();    
         
         game.createNextMatch();
         
@@ -57,17 +67,19 @@ public class AutoGameScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtActionInfo = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtChromosomeInfo = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtPointInfo = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtGenerationInfo = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
-        txtTournamentInfo = new javax.swing.JTextArea();
+        txtTankInfo = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
         setMaximumSize(new java.awt.Dimension(1200, 900));
         setMinimumSize(new java.awt.Dimension(1200, 750));
         setPreferredSize(new java.awt.Dimension(1200, 750));
@@ -87,69 +99,77 @@ public class AutoGameScreen extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("NEXT TURN !");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-
+        txtActionInfo.setEditable(false);
+        txtActionInfo.setBackground(new java.awt.Color(0, 0, 0));
         txtActionInfo.setColumns(20);
-        txtActionInfo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtActionInfo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtActionInfo.setForeground(new java.awt.Color(0, 204, 51));
         txtActionInfo.setRows(5);
         jScrollPane1.setViewportView(txtActionInfo);
 
+        txtChromosomeInfo.setEditable(false);
+        txtChromosomeInfo.setBackground(new java.awt.Color(0, 0, 0));
         txtChromosomeInfo.setColumns(20);
-        txtChromosomeInfo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtChromosomeInfo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtChromosomeInfo.setForeground(new java.awt.Color(0, 204, 51));
         txtChromosomeInfo.setRows(5);
         jScrollPane2.setViewportView(txtChromosomeInfo);
 
+        txtPointInfo.setEditable(false);
+        txtPointInfo.setBackground(new java.awt.Color(0, 0, 0));
         txtPointInfo.setColumns(20);
-        txtPointInfo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtPointInfo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtPointInfo.setForeground(new java.awt.Color(0, 204, 51));
         txtPointInfo.setRows(5);
         jScrollPane3.setViewportView(txtPointInfo);
 
-        txtTournamentInfo.setColumns(20);
-        txtTournamentInfo.setLineWrap(true);
-        txtTournamentInfo.setRows(5);
-        txtTournamentInfo.setWrapStyleWord(true);
-        txtTournamentInfo.setPreferredSize(new java.awt.Dimension(164, 650));
-        jScrollPane4.setViewportView(txtTournamentInfo);
+        txtGenerationInfo.setEditable(false);
+        txtGenerationInfo.setBackground(new java.awt.Color(0, 0, 0));
+        txtGenerationInfo.setColumns(20);
+        txtGenerationInfo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtGenerationInfo.setForeground(new java.awt.Color(0, 204, 51));
+        txtGenerationInfo.setRows(5);
+        jScrollPane5.setViewportView(txtGenerationInfo);
+
+        txtTankInfo.setEditable(false);
+        txtTankInfo.setBackground(new java.awt.Color(0, 0, 0));
+        txtTankInfo.setColumns(20);
+        txtTankInfo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtTankInfo.setForeground(new java.awt.Color(0, 204, 51));
+        txtTankInfo.setRows(5);
+        txtTankInfo.setAutoscrolls(false);
+        jScrollPane4.setViewportView(txtTankInfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 762, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 760, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jButton2)
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,33 +177,14 @@ public class AutoGameScreen extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        
-        battleScreen = new DrawBattleScreen(game);
-        battleScreen.setLocation(300, 50);
-        battleScreen.setSize(800, 800);
-        battleScreen.setBackground(Color.white);
-        battleScreen.setVisible(true);
-        this.add(battleScreen);
-        battleScreen.validate();    
-         System.out.println("OPENNED"); 
+       
+        
        // TODO add your handling code here:
         // update chromosome 
-         chromosomeInfo="";
-   chromosomeInfo+= "CHROMOSOME A : "+game.getC1()+"\n";
-   for (int i =0; i < Chromosome.numOfGen; i ++)
-   chromosomeInfo+= game.getPopulation().getChromosomes()[game.getC1()].getGen(i) + " ";
-   
-   chromosomeInfo+= "\nCHROMOSOME B : "+game.getC2()+"\n";
-   for (int i =0; i < Chromosome.numOfGen; i ++)
-   chromosomeInfo+= game.getPopulation().getChromosomes()[game.getC2()].getGen(i) + " ";
-      this.txtChromosomeInfo.setText(chromosomeInfo);     
-      
+         
     }//GEN-LAST:event_formWindowOpened
 
     
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        update();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseClicked
-
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseMoved
@@ -196,15 +197,16 @@ public class AutoGameScreen extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea txtActionInfo;
     private javax.swing.JTextArea txtChromosomeInfo;
+    private javax.swing.JTextArea txtGenerationInfo;
     private javax.swing.JTextArea txtPointInfo;
-    private javax.swing.JTextArea txtTournamentInfo;
+    private javax.swing.JTextArea txtTankInfo;
     // End of variables declaration//GEN-END:variables
 
       String actionInfo="";
@@ -217,22 +219,27 @@ public class AutoGameScreen extends javax.swing.JFrame {
      battleScreen.update(game);
      battleScreen.validate();
     
-    actionInfo = "";
-   if (game.getSetting().getCurrentTeamAction() == "B") {
-       actionInfo = "TEAM A\n";
-       actionInfo += game.getTeamA().getDecisionAction().getCommand()+"\n";
-       actionInfo += "("+game.getTeamA().getDecisionAction().getSource().getX()+","+game.getTeamA().getDecisionAction().getSource().getY()+")" ;
-       actionInfo += "("+game.getTeamA().getDecisionAction().getDestination().getX()+","+game.getTeamA().getDecisionAction().getDestination().getY()+")" ;
+    String actionInfoA = "";
+     String actionInfoB = "";
+    {
+       actionInfoA = "TEAM A\n";
+       actionInfoA += game.getTeamA().getDecisionAction().getCommand()+"\n";
+       actionInfoA += "("+game.getTeamA().getDecisionAction().getSource().getX()+","+game.getTeamA().getDecisionAction().getSource().getY()+")" ;
+       actionInfoA += "("+game.getTeamA().getDecisionAction().getDestination().getX()+","+game.getTeamA().getDecisionAction().getDestination().getY()+")" ;
    }
-   else {
-       actionInfo = "TEAM B\n";
-       actionInfo += game.getTeamB().getDecisionAction().getCommand()+"\n";
-       actionInfo += "("+game.getTeamB().getDecisionAction().getSource().getX()+","+game.getTeamB().getDecisionAction().getSource().getY()+")" ;
-       actionInfo += "("+game.getTeamB().getDecisionAction().getDestination().getX()+","+game.getTeamB().getDecisionAction().getDestination().getY()+")" ;
+  {
+       actionInfoB += "TEAM B\n";
+       actionInfoB += game.getTeamB().getDecisionAction().getCommand()+"\n";
+       actionInfoB += "("+game.getTeamB().getDecisionAction().getSource().getX()+","+game.getTeamB().getDecisionAction().getSource().getY()+")" ;
+       actionInfoB += "("+game.getTeamB().getDecisionAction().getDestination().getX()+","+game.getTeamB().getDecisionAction().getDestination().getY()+")" ;
    
    }
+  String actionInfo;
+  if (game.getSetting().getCurrentTeamAction()=="A") actionInfo = actionInfoB+"\n" + actionInfoA;
+  else actionInfo = actionInfoA+"\n" + actionInfoB;
+  
    
-   tournamentInfo = "TOURNAMENT STATISTIC\n";
+   tournamentInfo = "TOURNAMENT STATISTIC \n  GENERATION "+ game.getPopulation().getGeneration()+ "\n";
    for (int i =0; i < game.getPopulation().getNumOfChromosome(); i ++){
        tournamentInfo += "C"+(i+1) +" : "; 
        for (int j=0; j < Chromosome.numOfGen; j++)
@@ -240,7 +247,14 @@ public class AutoGameScreen extends javax.swing.JFrame {
    tournamentInfo+=" POINT :  " + game.getPopulation().getChromosomes()[i].getFitnessValue() +"\n";
    }
    
-   
+   try{
+   chromosomeInfo ="BEST CHROMOSOME\n";
+   chromosomeInfo+= game.getPopulation().getBestChromosome().getGen()[0] +" "+ game.getPopulation().getBestChromosome().getGen()[1]+" "+game.getPopulation().getBestChromosome().getGen()[2];
+   chromosomeInfo+= "\n FITNESS VALUE:  " +game.getPopulation().getBestChromosome().getFitnessValue();
+    chromosomeInfo+= "\n AT "+ +game.getPopulation().getBestGeneration()+  "th GENERATION " ;
+     chromosomeInfo+= "\n MUTATION: TRUE";
+   }
+   catch(Exception ex) {}
    
    pointInfo ="";
    pointInfo += "TEAM A : " + game.getTeamA().getPoint() +"\n";
@@ -248,12 +262,26 @@ public class AutoGameScreen extends javax.swing.JFrame {
    pointInfo += "CURRENT TURN : " + game.getSetting().getCurrentActionTurn() +"\n";
    pointInfo += "CURRENT GAME : " + game.getCurrentGame() +"\n";
      
-     this.txtActionInfo.setText(actionInfo);
+   // tank info
+       // set tank info
+       String tankA="";
+       for (int i =0; i < game.getTeamA().getNumOfTank(); i ++)
+           tankA += (game.getTeamA().getTanks()[i].getAmor() + " " + game.getTeamA().getTanks()[i].getDamange() + " " + game.getTeamA().getTanks()[i].getAttackRange())  
+                    + " "+ game.getTeamA().getTanks()[i].getPosition().getX() +  " "+ game.getTeamA().getTanks()[i].getPosition().getY() +    "\n";
+       String tankB="";
+       for (int  i =0; i < game.getTeamB().getNumOfTank(); i ++)
+           tankB += (game.getTeamB().getTanks()[i].getAmor() + " " + game.getTeamB().getTanks()[i].getDamange() + " " + game.getTeamB().getTanks()[i].getAttackRange())  
+                    + " " +game.getTeamB().getTanks()[i].getPosition().getX() +  " "+ game.getTeamB().getTanks()[i].getPosition().getY() +    "\n";
+        
+   
+   
+     this.txtActionInfo.setText(actionInfo );
      this.txtChromosomeInfo.setText(chromosomeInfo);
      this.txtPointInfo.setText(pointInfo);
-     this.txtTournamentInfo.setText(tournamentInfo);
+     this.txtGenerationInfo.setText(tournamentInfo);
+     this.txtTankInfo.setText( tankA +"\n\n"+tankB );
 }
 
-       
+  
     
 }

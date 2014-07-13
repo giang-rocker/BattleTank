@@ -6,6 +6,7 @@
 
 package battletank;
 
+import java.awt.Container;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.io.IOException;
  * @author Asus
  */
 public class TankTournament {
-private static final int WAIT_LENGTH = 10; // 1 second
+private static final int WAIT_LENGTH = 0; // 1 second
    
     /**
      * @param args the command line arguments
@@ -24,7 +25,7 @@ private static final int WAIT_LENGTH = 10; // 1 second
         // TODO code application logic here
       
          final AutoGameScreen AT = new AutoGameScreen();
-        
+         
         AT.addWindowListener(new WindowAdapter(){
                 public void windowClosing(WindowEvent e) {
                     System.exit(0);
@@ -47,12 +48,9 @@ class UIUpdater extends Thread {
         System.out.println("Error: " + e);
       }
       finally {
-          try {
+          
               AT.repaint();
-              Thread.sleep(WAIT_LENGTH);
-          } catch (InterruptedException ex) {
-              
-          }
+          
       }
     }
   }

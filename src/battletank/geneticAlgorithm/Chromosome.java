@@ -89,7 +89,7 @@ public class Chromosome {
         
         public void mutation(int rangeOfValue){
               Random R = new Random();
-            int index = R.nextInt( Chromosome.numOfGen)+1;
+            int index = R.nextInt( Chromosome.numOfGen);
             
             this.setGen( R.nextInt(rangeOfValue)+1 , index);
             

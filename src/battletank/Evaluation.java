@@ -35,16 +35,15 @@ public class Evaluation {
               if ( enemy.getTanks()[i].checkInAttackRange( player.getTanks()[j] ) ) valueInCheckB+= evaluate(player.getTanks()[i], C);
              
              }
-       
-       
-  
-       
-       value = valueA - valueB + valueInCheckB - valueInCheckA;
+   
+        value = valueA - valueB + valueInCheckB - valueInCheckA;
       // System.out.println("value "  + value);
        return value;
    }
     
       public int evaluate (Tank T, Chromosome C) {
+       if ( T.isAlive() )
        return ( C.getGen(0)*T.getAmor() + C.getGen(1)*T.getDamange() + C.getGen(2)*T.getAttackRange()); 
+       else return 0;
     }
 }

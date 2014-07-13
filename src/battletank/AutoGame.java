@@ -8,7 +8,10 @@ package battletank;
 import battletank.geneticAlgorithm.Chromosome;
 import battletank.geneticAlgorithm.Population;
 import java.awt.Point;
+import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -57,6 +60,7 @@ boolean c[][] ;
     }
 
     public AutoGame() {
+        
         evaluation = new Evaluation();
         population = new Population(50);
         population.generatePopulation();
@@ -71,6 +75,8 @@ boolean c[][] ;
         for (int j =0; j < this.getPopulation().getNumOfChromosome(); j ++) {
              c[i][j] = false;
         }
+       
+       currentGame = 0;
 
     }
 
@@ -88,10 +94,10 @@ boolean c[][] ;
         } else if (this.getSetting().getGameState() == Setting.GAME_STATE.FINISH) {
             // end of a game
             // update point
-            if (this.getTeamA().getPoint() > this.getTeamB().getPoint()) {
+            if (this.getTeamA().getPoint() > this.getTeamB().getPoint() ||  this.getTeamB().checkOutOfTank()  ) {
                 this.getPopulation().getChromosomes()[C1].setFitnessValue(this.getPopulation().getChromosomes()[C1].getFitnessValue() + 3);
-            } else if (this.getTeamA().getPoint() < this.getTeamB().getPoint()) {
-                this.getPopulation().getChromosomes()[C2].setFitnessValue(this.getPopulation().getChromosomes()[C2].getFitnessValue() + 1);
+            } else if (this.getTeamA().getPoint() < this.getTeamB().getPoint() ||  this.getTeamA().checkOutOfTank() ) {
+                this.getPopulation().getChromosomes()[C2].setFitnessValue(this.getPopulation().getChromosomes()[C2].getFitnessValue() + 3);
             } else {
 
                 this.getPopulation().getChromosomes()[C2].setFitnessValue(this.getPopulation().getChromosomes()[C2].getFitnessValue() + 1);
@@ -100,9 +106,20 @@ boolean c[][] ;
             // find nextmatch
             
           //  this.getPopulation().sortByFitnessValue();
+            // next season
+           if (! nextTournamentMatch()){
+                try {
+                    this.getReport().reportGeneration(this.getPopulation());
+                } catch (IOException ex) {
+                    Logger.getLogger(AutoGame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               this.getPopulation().evolution();
+             //   System.out.println("DONE EVOLUION");
+                this.nextSeason ();
+           
+           }
             
-           if (! nextTournamentMatch()) this.getSetting().setGameState(Setting.GAME_STATE.DONE); 
-           else createNextMatch();
+           createNextMatch();
             
             if (this.numOfUsedChromome != population.getNumOfChromosome()) {
           //      this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
@@ -246,9 +263,12 @@ boolean c[][] ;
             this.getTeamB().addTank(new Tank(armor, damage, attackRange, new Position(x, Game.ROW - y + 1)));
         }
 
-        numOfUsedChromome += 2;
-        currentGame++;
+         currentGame++;
+        if (R.nextBoolean())
         this.getSetting().setCurrentTeamAction("A");
+        else 
+        this.getSetting().setCurrentTeamAction("B");
+        
         this.getSetting().setCurrentActionTurn(0);
         this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
 
@@ -268,4 +288,20 @@ boolean c[][] ;
         }
     return false;
     }
+    
+    // reset statistic for next season ;
+       void nextSeason () {
+       
+        numOfUsedChromome = 0;
+         c = new boolean[this.getPopulation().getNumOfChromosome()][this.getPopulation().getNumOfChromosome()];
+        // reset check board
+       for (int i =0; i < this.getPopulation().getNumOfChromosome(); i ++)
+        for (int j =0; j < this.getPopulation().getNumOfChromosome(); j ++) {
+             c[i][j] = false;
+        }
+       
+       this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
+       currentGame = 0;
+       
+       }
 }
