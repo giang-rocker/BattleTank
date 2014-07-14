@@ -150,8 +150,8 @@ public class AutoGameScreen extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane3)
                     .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 760, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 748, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -159,17 +159,17 @@ public class AutoGameScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -244,12 +244,13 @@ public class AutoGameScreen extends javax.swing.JFrame {
        tournamentInfo += "C"+(i+1) +" : "; 
        for (int j=0; j < Chromosome.numOfGen; j++)
        tournamentInfo +=game.getPopulation().getChromosomes()[i].getGen(j) + " ";
-   tournamentInfo+=" POINT :  " + game.getPopulation().getChromosomes()[i].getFitnessValue() +"\n";
+   tournamentInfo+=" POINT :  " + game.getPopulation().getChromosomes()[i].getPoint() +"\n";
    }
    
    try{
    chromosomeInfo ="BEST CHROMOSOME\n";
    chromosomeInfo+= game.getPopulation().getBestChromosome().getGen()[0] +" "+ game.getPopulation().getBestChromosome().getGen()[1]+" "+game.getPopulation().getBestChromosome().getGen()[2];
+    chromosomeInfo+= "\n POINT:  " +game.getPopulation().getBestChromosome().getPoint();
    chromosomeInfo+= "\n FITNESS VALUE:  " +game.getPopulation().getBestChromosome().getFitnessValue();
     chromosomeInfo+= "\n AT "+ +game.getPopulation().getBestGeneration()+  "th GENERATION " ;
      chromosomeInfo+= "\n MUTATION: TRUE";

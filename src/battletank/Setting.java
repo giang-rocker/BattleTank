@@ -21,7 +21,7 @@ public class Setting {
     public GAME_STATE gameState;
 
     public static int MAX_TANK = 14;
-    public static int MAX_ACTION_TURN = 50;
+    public static int MAX_ACTION_TURN = 25;
     private int numOfTurn;
     private int currentActionTurn;
 

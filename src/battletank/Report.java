@@ -512,12 +512,17 @@ public class Report {
         
         // writer file
         Writer writerPopulation = null;
-        String file_generation = this.generation_path + "/" + P.getGeneration()+ "th_Generation.txt";
-    
+          String file_generation = "";
+         if (P.getGeneration()>9)
+       file_generation= this.generation_path + "/" + P.getGeneration()+ "th_Generation.txt";
+         else
+         file_generation = this.generation_path + "/0" + P.getGeneration()+ "th_Generation.txt";
+         
         File f = new File(file_generation);
         writerPopulation = new BufferedWriter(new FileWriter(new File(file_generation)));
         // header
         if (!f.exists()) f.createNewFile();
+       
         writerPopulation.write(  P.getGeneration() +"th GENERATION STATISTIC \n") ;
         // write gen
         
@@ -525,15 +530,19 @@ public class Report {
               writerPopulation.write ("C"+i +":  " );
             for (int j=0; j < Chromosome.numOfGen; j ++ )
           writerPopulation.write (P.getChromosomes()[i].getGen()[j] +" " );
-            writerPopulation.write ("  FitnessValue : " + P.getChromosomes()[i].getFitnessValue() + "\n" );
+               writerPopulation.write ("Point : " + P.getChromosomes()[i].getPoint()+ "  " );
+            writerPopulation.write ("Fitness Value : " + P.getChromosomes()[i].getFitnessValue()+ "\n" );
         }
           
-        writerPopulation.write("\n BEST CHROMOSOME OF "+   P.getGeneration() +"th GENERATION  \n") ;      
+        writerPopulation.write("\n BEST CHROMOSOME \n") ;      
           for (int j=0; j < Chromosome.numOfGen; j ++ )
           writerPopulation.write (P.getBestChromosome().getGen()[j] +" " );   
-         writerPopulation.write ("  FitnessValue : " + P.getBestChromosome().getFitnessValue() + "\n" );
-         
-      
+         writerPopulation.write ("  point : " + P.getBestChromosome().getPoint() + "\n  + FitnessValue : " + P.getBestChromosome().getFitnessValue()+ "\n" );
+        
+        writerPopulation.write("\n BEST CHROMOSOME OF "+   P.getGeneration() +"th GENERATION  \n") ;      
+          for (int j=0; j < Chromosome.numOfGen; j ++ )
+          writerPopulation.write (P.getBestChromosomeOfCurrentPopulation().getGen()[j] +" " );   
+         writerPopulation.write ("  point : " + P.getBestChromosomeOfCurrentPopulation().getPoint() + "\n  + FitnessValue : " + P.getBestChromosomeOfCurrentPopulation().getFitnessValue()+ "\n" );
          
          writerPopulation.close();
     }

@@ -95,19 +95,20 @@ boolean c[][] ;
             // end of a game
             // update point
             if (this.getTeamA().getPoint() > this.getTeamB().getPoint() ||  this.getTeamB().checkOutOfTank()  ) {
-                this.getPopulation().getChromosomes()[C1].setFitnessValue(this.getPopulation().getChromosomes()[C1].getFitnessValue() + 3);
+                this.getPopulation().getChromosomes()[C1].setPoint(this.getPopulation().getChromosomes()[C1].getPoint() + 3);
             } else if (this.getTeamA().getPoint() < this.getTeamB().getPoint() ||  this.getTeamA().checkOutOfTank() ) {
-                this.getPopulation().getChromosomes()[C2].setFitnessValue(this.getPopulation().getChromosomes()[C2].getFitnessValue() + 3);
+                this.getPopulation().getChromosomes()[C2].setPoint(this.getPopulation().getChromosomes()[C2].getPoint() + 3);
             } else {
 
-                this.getPopulation().getChromosomes()[C2].setFitnessValue(this.getPopulation().getChromosomes()[C2].getFitnessValue() + 1);
-                this.getPopulation().getChromosomes()[C1].setFitnessValue(this.getPopulation().getChromosomes()[C1].getFitnessValue() + 1);
+                this.getPopulation().getChromosomes()[C2].setPoint(this.getPopulation().getChromosomes()[C2].getPoint() + 1);
+                this.getPopulation().getChromosomes()[C1].setPoint(this.getPopulation().getChromosomes()[C1].getPoint() + 1);
             }
             // find nextmatch
             
-          //  this.getPopulation().sortByFitnessValue();
+          //  this.getPopulation().sortByPoint();
             // next season
            if (! nextTournamentMatch()){
+               this.getPopulation().calculateFitnessValue();
                 try {
                     this.getReport().reportGeneration(this.getPopulation());
                 } catch (IOException ex) {
@@ -163,7 +164,8 @@ boolean c[][] ;
                     //check attack
                     for (int j = 0; j < this.getTeamB().getNumOfTank(); j++) {
                         if (this.getTeamB().getTanks()[j].isAlive() && (this.getTeamA().getTanks()[i].checkInAttackRange(this.getTeamB().getTanks()[j]))) {
-                            Tank oldTank = new Tank(this.getTeamB().getTanks()[j]);
+                            Tank oldTank = new Tank();
+                            oldTank.clone(this.getTeamB().getTanks()[j]);
                             this.getTeamA().getTanks()[i].attack(this.getTeamB().getTanks()[j]);
                             int currentVal = evaluation.evaluate(this.getTeamA(), this.getTeamB(), population.getChromosomes()[C1]);
                             if (currentVal > maxVal) {
@@ -171,7 +173,7 @@ boolean c[][] ;
                                 bestDecisionAction = new DecisionAction("ATTACK", this.getTeamA().getTanks()[i].getPosition(), this.getTeamB().getTanks()[j].getPosition());
 
                             } // end of find best action
-                            this.getTeamB().getTanks()[j] = new Tank(oldTank);
+                            this.getTeamB().getTanks()[j].clone(oldTank);
                         }
 
                     } // check attack each tank of Team B
@@ -211,7 +213,8 @@ boolean c[][] ;
                     //check attack
                     for (int j = 0; j < this.getTeamA().getNumOfTank(); j++) {
                         if (this.getTeamA().getTanks()[j].isAlive() && (this.getTeamB().getTanks()[i].checkInAttackRange(this.getTeamA().getTanks()[j]))) {
-                            Tank oldTank = new Tank(this.getTeamA().getTanks()[j]);
+                            Tank oldTank = new Tank();
+                            oldTank.clone(this.getTeamA().getTanks()[j]);
                             this.getTeamB().getTanks()[i].attack(this.getTeamA().getTanks()[j]);
                             int currentVal = evaluation.evaluate(this.getTeamB(), this.getTeamA(), population.getChromosomes()[C2]);
                             if (currentVal > maxVal) {
@@ -219,7 +222,7 @@ boolean c[][] ;
                                 bestDecisionAction = new DecisionAction("ATTACK", this.getTeamB().getTanks()[i].getPosition(), this.getTeamA().getTanks()[j].getPosition());
 
                             } // end of find best action
-                            this.getTeamA().getTanks()[j] = new Tank(oldTank);
+                            this.getTeamA().getTanks()[j].clone(oldTank);
                         }
 
                     } // check attack each tank of Team B
@@ -282,7 +285,7 @@ boolean c[][] ;
     }
     
     boolean nextTournamentMatch () {
-    for (int i =0; i < this.getPopulation().getNumOfChromosome(); i ++)
+    for (int i =0; i < this.getPopulation().getNumOfChromosome()-1; i ++)
         for (int j =i+1; j < this.getPopulation().getNumOfChromosome(); j ++) {
             if (!c[i][j]) { c[i][j] = true; C1=i;C2=j; return true; }
         }

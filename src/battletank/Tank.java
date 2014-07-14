@@ -25,7 +25,7 @@ public class Tank {
     int price;
     boolean wasAttacked;
 
-    public boolean isWasAttacked() {
+    public boolean getWasAttacked() {
         return wasAttacked;
     }
 
@@ -91,13 +91,21 @@ public class Tank {
     }
     
     public Tank (Tank t ) {
-       this.position = new Position(t.getPosition());
+       this.position = new Position(t.getPosition().getX(), t.getPosition().getY());
         this.armor = t.armor;
         this.damange = t.damange;
         this.attackRange = t.attackRange;
         this.wasAttacked  = t.wasAttacked;
     }
-
+    
+    public Tank (){
+    this.position = new Position(0,0);
+        this.armor = 0;
+        this.damange = 0;
+        this.attackRange = 0;
+        this.wasAttacked = false;
+    }
+    
     public Tank(int armor, int damange, int attackRange) {
         this.position = new Position(0,0);
         this.armor = armor;
@@ -107,7 +115,7 @@ public class Tank {
     }
     
     public Tank(int armor, int damange, int attackRange, Position P) {
-        this.position = new Position(P);
+        this.position = new Position(P.getX(),P.getY());
         this.armor = armor;
         this.damange = damange;
         this.attackRange = attackRange;
@@ -131,6 +139,15 @@ public class Tank {
         return this.getAttackRange() >= manhattan;
       
   }
+
+    public void clone(Tank tank) {
+       this.setAmor( tank.getAmor());
+       this.setDamange(tank.getDamange());
+       this.setAttackRange(tank.getAttackRange());
+       this.setWasAttacked(tank.getWasAttacked());
+       this.setPosition(new Position(tank.getPosition().getX(), tank.getPosition().getY()));
+        
+    }
 
   
 }

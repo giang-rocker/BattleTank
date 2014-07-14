@@ -19,6 +19,7 @@ public class Population {
     Chromosome chromosomes[]; // population
     static int mutationProportion = 10 ; //percentage 
     Chromosome bestChromosome;
+    Chromosome bestChromosomeOfCurrentPopulation;
     int bestGeneration;
     int generation;
 
@@ -82,10 +83,19 @@ public class Population {
         this.generation = generation;
     }
 
+    public Chromosome getBestChromosomeOfCurrentPopulation() {
+        return bestChromosomeOfCurrentPopulation;
+    }
+
+    public void setBestChromosomeOfCurrentPopulation(Chromosome bestChromosomeOfCurrentPopulation) {
+        this.bestChromosomeOfCurrentPopulation = bestChromosomeOfCurrentPopulation;
+    }
+
     public Population ( int numOfChromosome ) {
         this.numOfChromosome = numOfChromosome;
         this.chromosomes = new Chromosome[numOfChromosome];
         this.numOfGoodChromosome =(int)( this.numOfChromosome * 0.8);
+        
         this.generation = 0;
     } 
     
@@ -99,6 +109,7 @@ public class Population {
        }
       
        bestChromosome = new Chromosome();
+       bestChromosomeOfCurrentPopulation = new Chromosome();
    } 
    
    // clone population
@@ -108,34 +119,36 @@ public class Population {
    }
    
    // Reproduction
-   void preproduction (int numOfGoodChromosome) {
-     int roulette []=  new int[1000] ; // roulette
-     int sumFitnessValue = 0;
+   void preproduction ( ) {
+      
+     int roulette []=  new int[100] ; // roulette
+     int sumpoint = 0;
      
      // sum fitness value
      for (int i =0; i < numOfGoodChromosome; i ++)
-         sumFitnessValue+= chromosomes[i].getFitnessValue();
+         sumpoint+= chromosomes[i].getPoint();
      
      // insert to roulette
      int index = 0;
-     for (int i =0; i < numOfGoodChromosome && index<1000; i ++) {
-         int len = (chromosomes[i].getFitnessValue()*1000)/ sumFitnessValue;
-         for (int j=0; j < len && (index+j)<1000; j++)
+     
+     for (int i =0; i < numOfGoodChromosome  ; i ++) {
+         int len = (chromosomes[i].getPoint()*100)/ sumpoint;
+          for (int j=0; j < len  ; j++)
              roulette[index+j] = i;
          index+=len;     
      }
      // insert the last
-     for (int i =index; i < 1000; i ++)roulette[i]= 0;
-     
-   
+     for (int i =index; i < 100; i ++)roulette[i]= 0;
+      
      // choose chromosome by spinning the roulette
      Population middlePopulation = new Population( numOfGoodChromosome );
      Random R = new Random ();
      for (int i =0; i < numOfGoodChromosome; i++) {
-            index = R.nextInt(100000);
-        index%=1000;
+            index = R.nextInt(1000000000);
+        index%=100;
         middlePopulation.getChromosomes()[i] = new Chromosome();
         middlePopulation.getChromosomes()[i].clone( chromosomes[roulette[index] ] );
+       if (roulette[index] ==0) System.out.println("0");
    
       }
     
@@ -144,14 +157,25 @@ public class Population {
      
      // add new chromosomes to the population
        addNewChromosomeToPopulation(numOfGoodChromosome);
+       /*
+        System.out.println ("TEMPORATION" );
+       for (int i =0; i <this.getNumOfChromosome(); i ++) { 
+              System.out.println ("C"+i +":  " );
+            for (int j=0; j < Chromosome.numOfGen; j ++ )
+          System.out.print (this.getChromosomes()[i].getGen()[j] +" " );
+            System.out.println ("Point : " + this.getChromosomes()[i].getPoint()+ "  " );
+            System.out.println ("Fitness Value : " + this.getChromosomes()[i].getFitnessValue()+ "\n" );
+        }
+               */
+       
    }
     
   // sort by fitness Value 
-   public void sortByFitnessValue () {
+   public void sortByPoint () {
        
-       for (int i =0; i < numOfChromosome; i++)
+       for (int i =0; i < numOfChromosome-1; i++)
             for (int j=i+1; j < numOfChromosome; j ++)
-                   if ( chromosomes[i].getFitnessValue() < chromosomes[j].getFitnessValue() ) {
+                   if ( chromosomes[i].getPoint() < chromosomes[j].getPoint() ) {
                    
                        chromosomes[i].swap ( chromosomes[j] );
                  
@@ -160,10 +184,14 @@ public class Population {
        
      
        
-       if (chromosomes[0] .getFitnessValue()  > bestChromosome.getFitnessValue()){
-       bestChromosome = new Chromosome ( chromosomes[0] );
+       if (chromosomes[0] .getPoint()  > bestChromosome.getPoint()){
+       bestChromosome = new Chromosome (  );
+       bestChromosome.clone(chromosomes[0]);
        bestGeneration = this.getGeneration();
        }
+       
+       bestChromosomeOfCurrentPopulation = new Chromosome();
+       bestChromosomeOfCurrentPopulation.clone(chromosomes[0]);
    }
    
    // choose good Chromosome // Parent Selection
@@ -173,21 +201,34 @@ public class Population {
    // cross Over chromosome
    public void crossOver () {
        // lai ghep 50 con tot nhat
-      boolean check[] = new boolean[numOfGoodChromosome];
+      boolean check[] = new boolean[numOfChromosome];
       
-      for ( int i=0; i < numOfGoodChromosome; i ++) check[i] = false;
+      for ( int i=0; i < numOfChromosome; i ++) check[i] = false;
       int count = 0;
-      while ( count <numOfGoodChromosome  ) {
+      while ( count <numOfChromosome  ) {
           Random R = new Random();
           int c1, c2;
           do {
-              c1 = R.nextInt(numOfGoodChromosome);
-              c2 = R.nextInt(numOfGoodChromosome);
+              c1 = R.nextInt(numOfChromosome);
+              c2 = R.nextInt(numOfChromosome);
           }
           while ( check[c1] || check[c2]  || c1==c2);
           
           check[c1]= true; check[c2]= true;
-          chromosomes[c1].crossOver( chromosomes[c2]);
+         
+            
+            int index = R.nextInt( Chromosome.numOfGen-1 )+1;
+            
+            Chromosome temp = new Chromosome();
+            temp.clone(this.getChromosomes()[c1]);
+            
+         for (int i=0; i  < index; i ++)
+               this.getChromosomes()[c1].setGen( temp.getGen()[i], i);
+         
+         for (int i=0; i  < index; i ++)
+               this.getChromosomes()[c2].setGen( this.getChromosomes()[c1].getGen()[i], i);
+            
+          
           count+=2;
       }
    
@@ -196,17 +237,17 @@ public class Population {
    // mutaion
    public void mutation() {
   Random R = new Random();
-       for (int i =0; i <numOfGoodChromosome; i++)
-           if ( R.nextInt(100) <  this.mutationProportion ) chromosomes[i].mutation(Population.rangeOfValue);
+       for (int i =0; i <numOfChromosome; i++)
+           if ( R.nextInt(100) <  this.mutationProportion ) {chromosomes[i].mutation(Population.rangeOfValue); System.out.println("DETECTED MUTATION");}
        
   }
    
    public void addNewChromosomeToPopulation (int numOfGoodChromosome ) {
      Random R = new Random();
        
-       for (int i =this.numOfGoodChromosome; i < this.numOfChromosome; i++)
+       for (int i = numOfGoodChromosome; i < this.numOfChromosome; i++)
          for (int j=0; j  < Chromosome.numOfGen; j ++)
-              chromosomes[i].setGen( R.nextInt(Population.rangeOfValue)+1 , j);
+              this.chromosomes[i].setGen( R.nextInt(Population.rangeOfValue)+1 , j);
        
        
       
@@ -216,9 +257,10 @@ public class Population {
    public void evolution () {
        
        // selection good chromosome
-       sortByFitnessValue(); 
+       sortByPoint();   
        // select parent
-       preproduction (numOfChromosome);
+       preproduction ( );
+
       // cross over
        crossOver(); 
        // mutation
@@ -229,7 +271,17 @@ public class Population {
        
        // reset fitness value
        for (int i =0; i < numOfChromosome ; i ++)
-           chromosomes[i].setFitnessValue(0);
-      
+           chromosomes[i].setPoint(0);
+       
    }
+   
+   public void calculateFitnessValue () {
+       int sumPoint = 0;
+       for (int i =0;i <numOfChromosome; i++)
+           sumPoint+=this.getChromosomes()[i].getPoint();
+       
+        for (int i =0;i <numOfChromosome; i++)
+            this.getChromosomes()[i].setFitnessValue(  ((float)(this.getChromosomes()[i].getPoint()) /sumPoint));
+   }
+   
 }

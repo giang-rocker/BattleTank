@@ -25,7 +25,7 @@ public class DrawBattleScreen  extends JComponent{
     public void paint(Graphics g) {
      
     g.drawImage( Asset.boardlg.getImage() , Asset.boardlg.getPosition().getX(),  Asset.boardlg.getPosition().getY(), this);
-         
+      try{   
         // read teams's decision place
       for (int i =0; i < game.getTeamA().getNumOfTank(); i ++){
             if (game.getTeamA().getTanks()[i].isAlive()){
@@ -50,6 +50,8 @@ public class DrawBattleScreen  extends JComponent{
             else //dead
                    g.drawImage( Asset.dead.getImage() ,  (game.getTeamB().getTanks()[i].getPosition().getX()-1) *CELL_UNIT, (game.getTeamB().getTanks()[i].getPosition().getY()-1) *CELL_UNIT, this);
         }
+      }
+      catch(Exception ex) {}
     
     g.finalize();
      repaint();

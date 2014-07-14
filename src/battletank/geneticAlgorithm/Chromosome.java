@@ -15,12 +15,21 @@ import java.util.Random;
 public class Chromosome {
     public static int numOfGen = 3;
     int gen[];
-    int fitnessValue;
+    int point;
+    float fitnessValue ;
+
+    public float getFitnessValue() {
+        return fitnessValue;
+    }
+
+    public void setFitnessValue(float fitnessValue) {
+        this.fitnessValue = fitnessValue;
+    }
 
     public int[] getGen() {
         return gen;
     }
-
+    
     public int getGen(int index) {
         return gen[index];
     }
@@ -33,12 +42,12 @@ public class Chromosome {
         this.gen[index] = value;
     }
 
-    public int getFitnessValue() {
-        return fitnessValue;
+    public int getPoint() {
+        return point;
     }
 
-    public void setFitnessValue(int fitnessValue) {
-        this.fitnessValue = fitnessValue;
+    public void setPoint(int point) {
+        this.point = point;
     }
     
     public Chromosome(int[] gen) {
@@ -47,17 +56,21 @@ public class Chromosome {
     
       public Chromosome(Chromosome X) {
         this.gen = X.getGen();
-        this.setFitnessValue( X.getFitnessValue() );
+        this.setPoint( X.getPoint() );
+        this.setFitnessValue(X.getFitnessValue());
     }
     
         public Chromosome( ) {
         this.gen = new int[numOfGen];
-        this.fitnessValue = 0;
+        this.point = 0;
+        this.fitnessValue=0;
     }
         
         public void clone ( Chromosome X ) {
-        this.gen = X.getGen();
-        this.setFitnessValue( X.getFitnessValue() );
+     for (int i=0; i <numOfGen; i++)
+            this.getGen()[i] = X.getGen()[i];
+        this.setPoint( X.getPoint() );
+         this.setFitnessValue(X.getFitnessValue());
     }
     
         public void swap ( Chromosome X ) {
@@ -72,18 +85,7 @@ public class Chromosome {
         
         // lai ghep 2 nhiem sac the
         public void crossOver ( Chromosome X ) {
-            Random R = new Random();
-            int index = R.nextInt( Chromosome.numOfGen-1 )+1;
-            
-            Chromosome temp = new Chromosome();
-            temp.clone(X);
-            
-         for (int i=0; i  < index; i ++)
-               this.setGen( temp.getGen()[i], i);
-         
-         for (int i=index; i  < Chromosome.numOfGen; i ++)
-               X.setGen( temp.getGen()[i], i);
-            
+          
         
         }
         
