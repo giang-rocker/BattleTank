@@ -13,7 +13,7 @@ import java.util.Random;
  * @author Administrator
  */
 public class Chromosome {
-    public static int numOfGen = 3;
+    public static int numOfGen = 4;
     int gen[];
     int point;
     float fitnessValue ;

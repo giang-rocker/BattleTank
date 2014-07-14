@@ -121,11 +121,13 @@ public class Tank {
         this.attackRange = attackRange;
         this.wasAttacked = false;
     }
-    public void attack ( Tank enemy ) {
+    public int attack ( Tank enemy ) {
     
         enemy.setAmor( Math.max(0, enemy.getAmor()-this.getDamange()) );
+       
         enemy.setWasAttacked( true);
-    
+        // return increase point
+    return ( Math.max(0, enemy.getAmor()-this.getDamange()) );
     }
     
     public boolean isAlive () {

@@ -25,7 +25,7 @@ public class AutoGameScreen extends javax.swing.JFrame {
      */
       public AutoGame game;
     
-      DrawBattleScreen battleScreen;
+    //  DrawBattleScreen battleScreen;
     
       Population population ;
     
@@ -45,13 +45,13 @@ public class AutoGameScreen extends javax.swing.JFrame {
        
         this.getContentPane().setBackground(Color.BLACK);
         
-         battleScreen = new DrawBattleScreen(game);
-        battleScreen.setLocation(300, 50);
-        battleScreen.setSize(800, 800);
-        battleScreen.setBackground(Color.white);
-        battleScreen.setVisible(true);
-        this.add(battleScreen);
-        battleScreen.validate();    
+      //   battleScreen = new DrawBattleScreen(game);
+      //  battleScreen.setLocation(300, 50);
+      //  battleScreen.setSize(800, 800);
+      //  battleScreen.setBackground(Color.white);
+      //  battleScreen.setVisible(true);
+     //   this.add(battleScreen);
+     //   battleScreen.validate();    
         
         game.createNextMatch();
         
@@ -216,8 +216,8 @@ public class AutoGameScreen extends javax.swing.JFrame {
   public void update () {
     
       game.updateAutoGame();
-     battleScreen.update(game);
-     battleScreen.validate();
+  //   battleScreen.update(game);
+  //   battleScreen.validate();
     
     String actionInfoA = "";
      String actionInfoB = "";

@@ -10,6 +10,8 @@ import java.awt.Container;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,8 +50,12 @@ class UIUpdater extends Thread {
         System.out.println("Error: " + e);
       }
       finally {
-          
-              AT.repaint();
+           try {
+               Thread.sleep(WAIT_LENGTH);
+               AT.repaint();
+           } catch (InterruptedException ex) {
+               Logger.getLogger(TankTournament.class.getName()).log(Level.SEVERE, null, ex);
+           }
           
       }
     }

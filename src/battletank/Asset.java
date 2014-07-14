@@ -29,6 +29,7 @@ public  class Asset {
        public static String path_tankB = path_asset+"tankBmd.png" ;
         public static String path_fire = path_asset+"firemd.png" ;
           public static String path_dead = path_asset+"dead.png" ;
+                public static String path_statistic = path_asset+"statistic.png" ;
        
     // image
    
@@ -38,5 +39,6 @@ public  class Asset {
       public static MyImage tankB = new MyImage(path_tankB);
             public static MyImage fire = new MyImage(path_fire);
               public static MyImage dead = new MyImage(path_dead);
+                   public static MyImage statistic = new MyImage(path_statistic);
 
 }

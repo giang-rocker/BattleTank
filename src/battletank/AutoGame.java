@@ -62,7 +62,7 @@ boolean c[][] ;
     public AutoGame() {
         
         evaluation = new Evaluation();
-        population = new Population(50);
+        population = new Population(100);
         population.generatePopulation();
         check = new boolean[population.getNumOfChromosome()];
         for (int i = 0; i < population.getNumOfChromosome(); i++) {
@@ -152,7 +152,7 @@ boolean c[][] ;
                         if (movePosition.inBound(1,Game.COLUMN,1, Game.ROW/2) && this.getTeamA().findTankByPosition(movePosition)==-1 ) {
 
                             this.getTeamA().getTanks()[i].setPosition(movePosition);
-                            int currentVal = evaluation.evaluate(this.getTeamA(), this.getTeamB(), population.getChromosomes()[C1]);
+                            int currentVal = evaluation.evaluate(this.getTeamA(), this.getTeamB(), population.getChromosomes()[C1],0);
                             if (currentVal > maxVal) {
                                 maxVal = currentVal;
                                 bestDecisionAction = new DecisionAction("MOVE", oldPosition, movePosition);
@@ -166,8 +166,8 @@ boolean c[][] ;
                         if (this.getTeamB().getTanks()[j].isAlive() && (this.getTeamA().getTanks()[i].checkInAttackRange(this.getTeamB().getTanks()[j]))) {
                             Tank oldTank = new Tank();
                             oldTank.clone(this.getTeamB().getTanks()[j]);
-                            this.getTeamA().getTanks()[i].attack(this.getTeamB().getTanks()[j]);
-                            int currentVal = evaluation.evaluate(this.getTeamA(), this.getTeamB(), population.getChromosomes()[C1]);
+                          int bonusPoint =   this.getTeamA().getTanks()[i].attack(this.getTeamB().getTanks()[j]);
+                            int currentVal = evaluation.evaluate(this.getTeamA(), this.getTeamB(), population.getChromosomes()[C1], bonusPoint );
                             if (currentVal > maxVal) {
                                 maxVal = currentVal;
                                 bestDecisionAction = new DecisionAction("ATTACK", this.getTeamA().getTanks()[i].getPosition(), this.getTeamB().getTanks()[j].getPosition());
@@ -201,7 +201,7 @@ boolean c[][] ;
                         if (movePosition.inBound(1,Game.COLUMN,Game.ROW/2+1, Game.ROW)&& this.getTeamB().findTankByPosition(movePosition)==-1) {
 
                             this.getTeamB().getTanks()[i].setPosition(movePosition);
-                            int currentVal = evaluation.evaluate(this.getTeamB(), this.getTeamA(), population.getChromosomes()[C2]);
+                            int currentVal = evaluation.evaluate(this.getTeamB(), this.getTeamA(), population.getChromosomes()[C2],0);
                             if (currentVal > maxVal) {
                                 maxVal = currentVal;
                                 bestDecisionAction = new DecisionAction("MOVE", oldPosition, movePosition);
@@ -215,8 +215,8 @@ boolean c[][] ;
                         if (this.getTeamA().getTanks()[j].isAlive() && (this.getTeamB().getTanks()[i].checkInAttackRange(this.getTeamA().getTanks()[j]))) {
                             Tank oldTank = new Tank();
                             oldTank.clone(this.getTeamA().getTanks()[j]);
-                            this.getTeamB().getTanks()[i].attack(this.getTeamA().getTanks()[j]);
-                            int currentVal = evaluation.evaluate(this.getTeamB(), this.getTeamA(), population.getChromosomes()[C2]);
+                            int bonusPoint =  this.getTeamB().getTanks()[i].attack(this.getTeamA().getTanks()[j]);
+                            int currentVal = evaluation.evaluate(this.getTeamB(), this.getTeamA(), population.getChromosomes()[C2],bonusPoint);
                             if (currentVal > maxVal) {
                                 maxVal = currentVal;
                                 bestDecisionAction = new DecisionAction("ATTACK", this.getTeamB().getTanks()[i].getPosition(), this.getTeamA().getTanks()[j].getPosition());
@@ -257,7 +257,7 @@ boolean c[][] ;
         for (int i = 0; i < Setting.MAX_TANK / 2; i++) {
             armor = R.nextInt(Tank.rangeOfValue) + 1;
             damage = R.nextInt(Tank.rangeOfValue/2) + 1;
-            attackRange = R.nextInt(Tank.rangeOfValue) + 1;
+            attackRange = R.nextInt(Tank.rangeOfValue-2) + 1;
             do {
                 x = R.nextInt(Game.COLUMN) + 1;
                 y = R.nextInt(Game.ROW / 2) + 1;

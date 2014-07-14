@@ -13,7 +13,7 @@ import battletank.geneticAlgorithm.Chromosome;
  * @author Administrator
  */
 public class Evaluation {
-    public int evaluate (Team player, Team enemy, Chromosome C) {
+    public int evaluate (Team player, Team enemy, Chromosome C,int bonusPoint) {
        int value = 0;
        // team A value
        int valueA = 0;
@@ -36,7 +36,7 @@ public class Evaluation {
              
              }
    
-        value = valueA - valueB + valueInCheckB - valueInCheckA;
+        value = valueA - valueB + valueInCheckB - valueInCheckA+ C.getGen(3)* bonusPoint;
       // System.out.println("value "  + value);
        return value;
    }
