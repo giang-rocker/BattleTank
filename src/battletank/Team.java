@@ -112,7 +112,9 @@ public class Team {
     
     
     public void addDecisionBet (DecisionBet desisionBet) {
-        this.decisionBet[desisionBet.getBetTurn()] = new DecisionBet(desisionBet.getPrice());
+        this.decisionBet[desisionBet.getBetTurn()] = new DecisionBet( );
+        this.decisionBet[desisionBet.getBetTurn()].setBetTurn(desisionBet.getBetTurn());
+         this.decisionBet[desisionBet.getBetTurn()].setPrice(desisionBet.getPrice());
         
     }
     
@@ -127,7 +129,8 @@ public class Team {
     }
       
       public void addTank (Tank T) {
-          this.tanks[numOfTank] = new Tank(T);
+          this.tanks[numOfTank] = new Tank();
+          this.tanks[numOfTank].clone(T);
           this.numOfTank++;
       }
    
@@ -155,6 +158,10 @@ public class Team {
         return true;
     }
     
-   
+   public void resetStatistic (){
+        this.numOfTank=0;
+        this.point = 0 ;
+        this.money=0;
+    }
    
 }

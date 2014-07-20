@@ -1,109 +1,39 @@
 1th GENERATION STATISTIC 
-C0:  95 18 28 33 Point : 187  Fitness Value : 0.013312451
-C1:  77 4 39 26 Point : 147  Fitness Value : 0.010464868
-C2:  66 18 28 33 Point : 147  Fitness Value : 0.010464868
-C3:  85 18 28 33 Point : 154  Fitness Value : 0.010963195
-C4:  100 32 53 75 Point : 155  Fitness Value : 0.011034384
-C5:  66 71 50 71 Point : 113  Fitness Value : 0.008044423
-C6:  41 49 67 98 Point : 81  Fitness Value : 0.005766356
-C7:  70 48 55 49 Point : 129  Fitness Value : 0.009183455
-C8:  78 18 28 33 Point : 181  Fitness Value : 0.0128853135
-C9:  78 18 28 33 Point : 156  Fitness Value : 0.011105574
-C10:  94 68 73 81 Point : 110  Fitness Value : 0.007830854
-C11:  70 48 28 33 Point : 132  Fitness Value : 0.009397024
-C12:  41 49 28 33 Point : 131  Fitness Value : 0.009325835
-C13:  40 85 16 63 Point : 74  Fitness Value : 0.005268029
-C14:  78 18 28 33 Point : 184  Fitness Value : 0.0130988825
-C15:  61 18 28 33 Point : 179  Fitness Value : 0.012742935
-C16:  94 68 73 39 Point : 128  Fitness Value : 0.009112266
-C17:  77 81 28 33 Point : 119  Fitness Value : 0.00847156
-C18:  100 74 72 18 Point : 125  Fitness Value : 0.008898697
-C19:  93 12 40 83 Point : 179  Fitness Value : 0.012742935
-C20:  93 12 40 61 Point : 173  Fitness Value : 0.012315797
-C21:  75 13 12 44 Point : 210  Fitness Value : 0.014949812
-C22:  78 18 28 33 Point : 173  Fitness Value : 0.012315797
-C23:  78 18 28 64 Point : 193  Fitness Value : 0.013739589
-C24:  78 91 50 33 Point : 136  Fitness Value : 0.009681783
-C25:  70 48 55 49 Point : 131  Fitness Value : 0.009325835
-C26:  61 35 92 93 Point : 112  Fitness Value : 0.007973232
-C27:  53 65 44 68 Point : 117  Fitness Value : 0.008329181
-C28:  100 32 37 91 Point : 170  Fitness Value : 0.012102229
-C29:  78 18 29 93 Point : 164  Fitness Value : 0.0116750905
-C30:  78 18 28 33 Point : 170  Fitness Value : 0.012102229
-C31:  90 100 54 39 Point : 121  Fitness Value : 0.0086139385
-C32:  55 18 28 33 Point : 176  Fitness Value : 0.012529366
-C33:  36 66 20 94 Point : 93  Fitness Value : 0.0066206306
-C34:  34 70 5 23 Point : 108  Fitness Value : 0.0076884744
-C35:  43 49 39 26 Point : 106  Fitness Value : 0.007546095
-C36:  42 99 2 57 Point : 115  Fitness Value : 0.008186801
-C37:  73 100 42 75 Point : 119  Fitness Value : 0.00847156
-C38:  34 18 28 33 Point : 131  Fitness Value : 0.009325835
-C39:  78 18 28 33 Point : 186  Fitness Value : 0.013241261
-C40:  78 91 50 15 Point : 138  Fitness Value : 0.009824161
-C41:  66 71 50 71 Point : 95  Fitness Value : 0.00676301
-C42:  78 18 28 33 Point : 194  Fitness Value : 0.013810778
-C43:  58 18 28 33 Point : 158  Fitness Value : 0.011247953
-C44:  78 18 28 15 Point : 188  Fitness Value : 0.013383641
-C45:  53 41 26 100 Point : 163  Fitness Value : 0.011603901
-C46:  69 91 80 33 Point : 88  Fitness Value : 0.006264683
-C47:  100 90 59 37 Point : 151  Fitness Value : 0.010749626
-C48:  78 18 28 33 Point : 151  Fitness Value : 0.010749626
-C49:  42 18 36 54 Point : 136  Fitness Value : 0.009681783
-C50:  43 49 10 63 Point : 163  Fitness Value : 0.011603901
-C51:  36 18 28 33 Point : 125  Fitness Value : 0.008898697
-C52:  78 18 28 44 Point : 179  Fitness Value : 0.012742935
-C53:  78 18 28 71 Point : 197  Fitness Value : 0.014024347
-C54:  69 91 80 61 Point : 93  Fitness Value : 0.0066206306
-C55:  70 91 50 15 Point : 116  Fitness Value : 0.008257991
-C56:  78 18 28 33 Point : 188  Fitness Value : 0.013383641
-C57:  55 42 97 17 Point : 98  Fitness Value : 0.006976579
-C58:  78 18 28 33 Point : 178  Fitness Value : 0.012671744
-C59:  100 74 72 25 Point : 139  Fitness Value : 0.009895352
-C60:  89 3 66 33 Point : 164  Fitness Value : 0.0116750905
-C61:  36 66 20 94 Point : 101  Fitness Value : 0.0071901474
-C62:  55 15 49 89 Point : 151  Fitness Value : 0.010749626
-C63:  90 100 28 33 Point : 112  Fitness Value : 0.007973232
-C64:  69 61 28 33 Point : 149  Fitness Value : 0.010607247
-C65:  90 100 54 75 Point : 98  Fitness Value : 0.006976579
-C66:  78 18 28 33 Point : 155  Fitness Value : 0.011034384
-C67:  78 18 28 33 Point : 192  Fitness Value : 0.013668399
-C68:  78 18 28 33 Point : 199  Fitness Value : 0.014166726
-C69:  90 100 15 75 Point : 146  Fitness Value : 0.010393678
-C70:  95 47 24 82 Point : 171  Fitness Value : 0.012173418
-C71:  78 18 72 25 Point : 130  Fitness Value : 0.009254646
-C72:  84 69 75 35 Point : 103  Fitness Value : 0.0073325266
-C73:  90 100 54 75 Point : 125  Fitness Value : 0.008898697
-C74:  70 48 55 49 Point : 133  Fitness Value : 0.009468214
-C75:  78 18 28 33 Point : 181  Fitness Value : 0.0128853135
-C76:  91 18 28 33 Point : 165  Fitness Value : 0.01174628
-C77:  73 100 42 33 Point : 113  Fitness Value : 0.008044423
-C78:  75 13 12 33 Point : 193  Fitness Value : 0.013739589
-C79:  78 18 28 33 Point : 187  Fitness Value : 0.013312451
-C80:  70 80 4 49 Point : 170  Fitness Value : 0.012102229
-C81:  78 52 33 5 Point : 156  Fitness Value : 0.011105574
-C82:  17 89 69 72 Point : 54  Fitness Value : 0.0038442372
-C83:  77 4 39 5 Point : 161  Fitness Value : 0.011461522
-C84:  97 20 92 60 Point : 129  Fitness Value : 0.009183455
-C85:  62 80 37 12 Point : 124  Fitness Value : 0.0088275075
-C86:  55 36 49 53 Point : 123  Fitness Value : 0.008756318
-C87:  36 66 20 92 Point : 111  Fitness Value : 0.007902043
-C88:  55 42 79 14 Point : 83  Fitness Value : 0.005908735
-C89:  89 3 66 1 Point : 140  Fitness Value : 0.009966541
-C90:  58 35 47 10 Point : 130  Fitness Value : 0.009254646
-C91:  66 15 55 36 Point : 133  Fitness Value : 0.009468214
-C92:  84 69 75 19 Point : 112  Fitness Value : 0.007973232
-C93:  69 61 89 37 Point : 75  Fitness Value : 0.0053392183
-C94:  77 81 36 29 Point : 142  Fitness Value : 0.01010892
-C95:  39 17 54 10 Point : 121  Fitness Value : 0.0086139385
-C96:  97 20 32 51 Point : 201  Fitness Value : 0.014309105
-C97:  90 21 78 29 Point : 130  Fitness Value : 0.009254646
-C98:  17 89 57 98 Point : 51  Fitness Value : 0.0036306684
-C99:  39 100 10 69 Point : 80  Fitness Value : 0.005695166
+C0:  19 32 69 30 Point : 60  Fitness Value : 0.04658385
+C1:  35 27 92 15 Point : 55  Fitness Value : 0.042701863
+C2:  23 59 35 96 Point : 48  Fitness Value : 0.03726708
+C3:  19 32 84 20 Point : 51  Fitness Value : 0.039596274
+C4:  35 87 92 48 Point : 51  Fitness Value : 0.039596274
+C5:  96 82 86 96 Point : 40  Fitness Value : 0.031055901
+C6:  82 41 84 20 Point : 40  Fitness Value : 0.031055901
+C7:  23 59 35 15 Point : 42  Fitness Value : 0.032608695
+C8:  73 57 72 88 Point : 33  Fitness Value : 0.025621118
+C9:  31 74 15 21 Point : 30  Fitness Value : 0.023291925
+C10:  73 72 11 4 Point : 15  Fitness Value : 0.0116459625
+C11:  19 32 69 54 Point : 67  Fitness Value : 0.052018635
+C12:  1 1 1 30 Point : 32  Fitness Value : 0.024844721
+C13:  2 7 93 84 Point : 57  Fitness Value : 0.044254657
+C14:  1 1 1 30 Point : 44  Fitness Value : 0.03416149
+C15:  59 97 40 82 Point : 20  Fitness Value : 0.015527951
+C16:  19 32 69 54 Point : 50  Fitness Value : 0.038819876
+C17:  1 1 1 61 Point : 50  Fitness Value : 0.038819876
+C18:  59 97 11 4 Point : 11  Fitness Value : 0.008540372
+C19:  82 41 84 54 Point : 56  Fitness Value : 0.04347826
+C20:  67 59 73 16 Point : 32  Fitness Value : 0.024844721
+C21:  67 29 29 22 Point : 21  Fitness Value : 0.016304348
+C22:  35 27 62 33 Point : 46  Fitness Value : 0.035714287
+C23:  67 27 92 15 Point : 47  Fitness Value : 0.036490683
+C24:  67 89 88 68 Point : 47  Fitness Value : 0.036490683
+C25:  35 87 64 39 Point : 46  Fitness Value : 0.035714287
+C26:  96 82 86 2 Point : 33  Fitness Value : 0.025621118
+C27:  31 74 15 72 Point : 31  Fitness Value : 0.024068324
+C28:  2 8 2 98 Point : 51  Fitness Value : 0.039596274
+C29:  1 1 36 30 Point : 82  Fitness Value : 0.06366459
 
  BEST CHROMOSOME 
-78 18 28 33   point : 233
-  + FitnessValue : 0.0166619
+19 32 69 54   point : 75
+  + FitnessValue : 0.058049537
 
  BEST CHROMOSOME OF 1th GENERATION  
-78 18 28 33   point : 233
-  + FitnessValue : 0.0166619
+19 32 69 54   point : 75
+  + FitnessValue : 0.058049537

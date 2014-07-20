@@ -122,6 +122,7 @@ public class Game {
 
         if (this.getSetting().getGameState() == Setting.GAME_STATE.BET) {
             if (this.getSetting().getCurrentBetTurn() == this.getSetting().getNumOfTank()) {
+                setTeamGoFirst () ;
                 this.getSetting().setGameState(Setting.GAME_STATE.PLACE);
             } else {
                 updateBetTurn();
@@ -152,7 +153,7 @@ public class Game {
     }
 // update BET
 
-    private void updateBetTurn() {
+    void updateBetTurn() {
         try {
 
             this.getReport().readTeamBetDecision(this);
@@ -204,18 +205,25 @@ public class Game {
         }
 
         // check illegal decision
-        // set team go first
+       
+
+    }
+    // set team go first
+    void setTeamGoFirst () {
+    
+     // set team go first
         if (this.getTeamA().getMoney() > this.getTeamB().getMoney()) {
             this.getSetting().setCurrentTeamAction("A");
         } else if (this.getTeamA().getMoney() < this.getTeamB().getMoney()) {
             this.getSetting().setCurrentTeamAction("B");
-        } else {
+        } else 
+            {
             Random R = new Random();
             boolean f = R.nextBoolean();
-            //  if (f)   this.getSetting().setCurrentTeamAction("A");
-            this.getSetting().setCurrentTeamAction("A");
+              if (f)   this.getSetting().setCurrentTeamAction("A");
+              else  this.getSetting().setCurrentTeamAction("B");
         }
-
+         
     }
 
     // update Action

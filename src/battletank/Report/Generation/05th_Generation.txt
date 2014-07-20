@@ -1,0 +1,39 @@
+5th GENERATION STATISTIC 
+C0:  2 7 69 54 Point : 44  Fitness Value : 0.034267914
+C1:  1 69 69 54 Point : 34  Fitness Value : 0.02647975
+C2:  1 1 69 30 Point : 48  Fitness Value : 0.037383176
+C3:  1 1 69 20 Point : 55  Fitness Value : 0.04283489
+C4:  1 1 69 7 Point : 60  Fitness Value : 0.046728972
+C5:  2 7 93 84 Point : 52  Fitness Value : 0.040498443
+C6:  20 7 93 84 Point : 41  Fitness Value : 0.031931464
+C7:  26 1 69 20 Point : 34  Fitness Value : 0.02647975
+C8:  2 7 1 50 Point : 14  Fitness Value : 0.010903426
+C9:  2 7 93 84 Point : 57  Fitness Value : 0.044392522
+C10:  1 1 31 11 Point : 56  Fitness Value : 0.043613706
+C11:  2 62 89 34 Point : 38  Fitness Value : 0.029595016
+C12:  1 1 36 30 Point : 45  Fitness Value : 0.03504673
+C13:  1 1 36 30 Point : 46  Fitness Value : 0.035825547
+C14:  2 62 31 11 Point : 23  Fitness Value : 0.017912773
+C15:  1 1 69 20 Point : 55  Fitness Value : 0.04283489
+C16:  1 1 69 20 Point : 50  Fitness Value : 0.03894081
+C17:  1 1 92 48 Point : 49  Fitness Value : 0.038161993
+C18:  2 1 69 20 Point : 56  Fitness Value : 0.043613706
+C19:  1 7 93 84 Point : 64  Fitness Value : 0.049844235
+C20:  1 87 69 54 Point : 33  Fitness Value : 0.025700934
+C21:  1 1 69 69 Point : 48  Fitness Value : 0.037383176
+C22:  1 1 69 20 Point : 66  Fitness Value : 0.05140187
+C23:  1 1 69 54 Point : 69  Fitness Value : 0.05373832
+C24:  69 22 75 42 Point : 19  Fitness Value : 0.014797508
+C25:  20 45 20 23 Point : 17  Fitness Value : 0.013239875
+C26:  26 3 31 33 Point : 21  Fitness Value : 0.01635514
+C27:  1 1 69 59 Point : 55  Fitness Value : 0.04283489
+C28:  79 8 5 71 Point : 18  Fitness Value : 0.014018691
+C29:  79 8 5 95 Point : 17  Fitness Value : 0.013239875
+
+ BEST CHROMOSOME 
+1 1 36 30   point : 82
+  + FitnessValue : 0.06366459
+
+ BEST CHROMOSOME OF 5th GENERATION  
+1 1 69 20   point : 70
+  + FitnessValue : 0.054179568

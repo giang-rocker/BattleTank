@@ -25,7 +25,7 @@ public class AutoGameScreen extends javax.swing.JFrame {
      */
       public AutoGame game;
     
-    //  DrawBattleScreen battleScreen;
+      DrawBattleScreen battleScreen;
     
       Population population ;
     
@@ -45,16 +45,18 @@ public class AutoGameScreen extends javax.swing.JFrame {
        
         this.getContentPane().setBackground(Color.BLACK);
         
-      //   battleScreen = new DrawBattleScreen(game);
-      //  battleScreen.setLocation(300, 50);
-      //  battleScreen.setSize(800, 800);
-      //  battleScreen.setBackground(Color.white);
-      //  battleScreen.setVisible(true);
-     //   this.add(battleScreen);
-     //   battleScreen.validate();    
-        
+         battleScreen = new DrawBattleScreen(game);
+        battleScreen.setLocation(300, 50);
+        battleScreen.setSize(800, 800);
+        battleScreen.setBackground(Color.white);
+        battleScreen.setVisible(true);
+      //  this.add(battleScreen);
+      //  battleScreen.validate();    
+        game.nextTournamentMatch();
         game.createNextMatch();
         
+         game.getPopulation().getChromosomes()[0].setGen( new int[] {1,1,10,100} );
+       
     }
   
  
@@ -158,17 +160,20 @@ public class AutoGameScreen extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 22, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4)))
                 .addContainerGap())
         );
 
@@ -191,6 +196,7 @@ public class AutoGameScreen extends javax.swing.JFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         System.out.println("Click!");        // TODO add your handling code here:
+        
     }//GEN-LAST:event_formMouseClicked
 
  
@@ -214,11 +220,11 @@ public class AutoGameScreen extends javax.swing.JFrame {
       String pointInfo = "";
       String tournamentInfo = "";
   public void update () {
-    
+       
       game.updateAutoGame();
-  //   battleScreen.update(game);
-  //   battleScreen.validate();
-    
+   //  battleScreen.update(game);
+   //  battleScreen.validate();
+       try{
     String actionInfoA = "";
      String actionInfoB = "";
     {
@@ -247,21 +253,23 @@ public class AutoGameScreen extends javax.swing.JFrame {
    tournamentInfo+=" POINT :  " + game.getPopulation().getChromosomes()[i].getPoint() +"\n";
    }
    
-   try{
+
    chromosomeInfo ="BEST CHROMOSOME\n";
    chromosomeInfo+= game.getPopulation().getBestChromosome().getGen()[0] +" "+ game.getPopulation().getBestChromosome().getGen()[1]+" "+game.getPopulation().getBestChromosome().getGen()[2];
     chromosomeInfo+= "\n POINT:  " +game.getPopulation().getBestChromosome().getPoint();
    chromosomeInfo+= "\n FITNESS VALUE:  " +game.getPopulation().getBestChromosome().getFitnessValue();
     chromosomeInfo+= "\n AT "+ +game.getPopulation().getBestGeneration()+  "th GENERATION " ;
      chromosomeInfo+= "\n MUTATION: TRUE";
-   }
-   catch(Exception ex) {}
+   
    
    pointInfo ="";
-   pointInfo += "TEAM A : " + game.getTeamA().getPoint() +"\n";
-   pointInfo += "TEAM B : " + game.getTeamB().getPoint() +"\n";
-   pointInfo += "CURRENT TURN : " + game.getSetting().getCurrentActionTurn() +"\n";
+     pointInfo += "MONEY A : " + game.getTeamA().getMoney()+"\n";
+   pointInfo += "MONEY B : " + game.getTeamB().getMoney() +"\n";
+   pointInfo += "POINT A : " + game.getTeamA().getPoint() +"\n";
+   pointInfo += "POINT B : " + game.getTeamB().getPoint() +"\n";
+    pointInfo += "CURRENT TURN : " + game.getSetting().getCurrentActionTurn() +"\n";
    pointInfo += "CURRENT GAME : " + game.getCurrentGame() +"\n";
+    pointInfo += "CURRENT GAME STATE : " + game.getSetting().getGameState()+"\n";
      
    // tank info
        // set tank info
@@ -281,6 +289,8 @@ public class AutoGameScreen extends javax.swing.JFrame {
      this.txtPointInfo.setText(pointInfo);
      this.txtGenerationInfo.setText(tournamentInfo);
      this.txtTankInfo.setText( tankA +"\n\n"+tankB );
+   }
+   catch(Exception ex) {}
 }
 
   

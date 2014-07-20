@@ -30,13 +30,20 @@ public class Evaluation {
        int valueInCheckB = 0;
        
         for (int i =0; i < player.getNumOfTank(); i ++)
-             for (int j =0; j < enemy.numOfTank; j++) {
-             if ( player.getTanks()[i].checkInAttackRange( enemy.getTanks()[j] ) ) valueInCheckA+= evaluate(enemy.getTanks()[i], C);
-              if ( enemy.getTanks()[i].checkInAttackRange( player.getTanks()[j] ) ) valueInCheckB+= evaluate(player.getTanks()[i], C);
+             for (int j =0; j < enemy.getNumOfTank(); j++) {
+             if ( player.getTanks()[i].checkInAttackRange( enemy.getTanks()[j] ) ) valueInCheckA+= evaluate(enemy.getTanks()[j], C);
              
              }
    
-        value = valueA - valueB + valueInCheckB - valueInCheckA+ C.getGen(3)* bonusPoint;
+        for (int i =0; i < enemy.getNumOfTank(); i ++)
+             for (int j =0; j < player.getNumOfTank(); j++) {
+            if ( enemy.getTanks()[i].checkInAttackRange( player.getTanks()[j] ) ) valueInCheckB+= evaluate(player.getTanks()[j], C);
+             
+             }
+      
+        
+        
+        value = valueA - valueB + valueInCheckA- valueInCheckB + C.getGen(3)* bonusPoint;
       // System.out.println("value "  + value);
        return value;
    }

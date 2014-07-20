@@ -41,15 +41,11 @@ class UIUpdater extends Thread {
   @Override
   public void run() {
     while (true &&  AT.game.getSetting().getGameState()!=Setting.GAME_STATE.DONE  ) {
-       try {
+        
          AT.setVisible(true);
         AT.update();
         
-      }
-      catch (Exception e) {
-        System.out.println("Error: " + e);
-      }
-      finally {
+      
            try {
                Thread.sleep(WAIT_LENGTH);
                AT.repaint();
@@ -57,7 +53,7 @@ class UIUpdater extends Thread {
                Logger.getLogger(TankTournament.class.getName()).log(Level.SEVERE, null, ex);
            }
           
-      }
+       
     }
   }
 }

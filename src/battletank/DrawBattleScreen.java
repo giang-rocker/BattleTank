@@ -25,8 +25,15 @@ public class DrawBattleScreen  extends JComponent{
     }
     
     public void paint(Graphics g) {
+        // draw main backgdound
+         g.drawImage( Asset.boardlg.getImage() , Asset.boardlg.getPosition().getX(),  Asset.boardlg.getPosition().getY(), this);
+   
+        
+         // draw bet backgroud
+        if ( game.getSetting().getGameState() == Setting.GAME_STATE.BET ) drawBet(g);
+        else { // draw action background
+        
      g.setColor(Color.blue);g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
-    g.drawImage( Asset.boardlg.getImage() , Asset.boardlg.getPosition().getX(),  Asset.boardlg.getPosition().getY(), this);
       try{   
         // read teams's decision place
       for (int i =0; i < game.getTeamA().getNumOfTank(); i ++){
@@ -70,10 +77,11 @@ public class DrawBattleScreen  extends JComponent{
         }
       }
       catch(Exception ex) {}
-    
+    }
     g.finalize();
      repaint();
   
+        
   }
 
     
@@ -86,5 +94,33 @@ public class DrawBattleScreen  extends JComponent{
     
     
     
+void drawBet (Graphics g) {
+    int baseX = 0 ;
+    int baseY = 200;
+   int betIndex =  game.getSetting().getCurrentBetTurn()-1 ; 
+   
+    // draw Background
+    g.drawImage (Asset.betBackground.getImage(), baseX,baseY,this);
+    // draw Price A
+    int priceA = game.getTeamA().getDecisiontBet()[betIndex].getPrice();
+    
+    int priceB = game.getTeamB().getDecisiontBet()[ betIndex ].getPrice();
+   g.setColor(Color.decode("#ff8a00"));g.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 50));
+   g.drawString  ( priceA+"",baseX+45,baseY+150  ); 
+   g.drawString  (priceB +"",baseX+420,baseY+150  ); 
+   
+   if ( priceA>=priceB  )
+   g.drawImage(Asset.check.getImage(),baseX+65,baseY+150,this  ); 
+   if ( priceA<=priceB  )
+   g.drawImage(Asset.check.getImage(),baseX+450,baseY+150,this  ); 
+   
+   
+     g.setColor(Color.decode("#003e09") );g.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
+    // draw Tank's staticstic
+       g.drawString(game. getTanks()[betIndex].getAmor()+"", baseX+245,baseY+200 );
+        g.drawString(game .getTanks()[betIndex].getDamange()+"", baseX+310,baseY+200);
+        g.drawString(game .getTanks()[betIndex].getAttackRange()+"", baseX+365,baseY+200 );
+
+}
     
 }
