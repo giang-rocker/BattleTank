@@ -332,10 +332,10 @@ public class Report {
     }
 
     // read status map's info
+    
     // load data from report file
+    // team part    
     public void readReportStatus(Game game) {
-        
-        
     }
 
     // generate file status for each team
@@ -379,7 +379,7 @@ public class Report {
             // team B
             
             // insert team Name team V
-            writerTeamA.write(game.getSetting().getNameTeamB() + "\n");
+         //   writerTeamA.write(game.getSetting().getNameTeamB() + "\n");
           // insert point
             writerTeamA.write(game.getTeamB().getPoint()+ "\n");
            // insert numOfTank
@@ -394,7 +394,7 @@ public class Report {
              writerTeamA.close();
          
         }
-        
+        // TEAM B
          f = new File(this.file_teamB_status);
         if (f.exists() && !f.isDirectory()) {
             // team B
@@ -416,7 +416,7 @@ public class Report {
             // team A
             
             // insert team Name team A
-            writerTeamB.write(game.getSetting().getNameTeamA() + "\n");
+        //    writerTeamB.write(game.getSetting().getNameTeamA() + "\n");
           // insert point
             writerTeamB.write(game.getTeamA().getPoint()+ "\n");
            // insert numOfTank
@@ -501,7 +501,7 @@ public class Report {
         }
 
     }
-    //
+  
     
     // report generation statistic
     

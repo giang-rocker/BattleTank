@@ -94,39 +94,36 @@ public class AutoGame extends Game {
                 findBestDecisionBet();
                 updateBetTurn();
                 // update current statis
-                
+
                 if (!checkBetDicision(this.getTeamA())) {
                     this.getSetting().setGameState(Setting.GAME_STATE.FINISH);
                     this.getSetting().setWinner(this.getTeamB().getTeamName());
-                }
-                else if (!checkBetDicision(this.getTeamB())) {
+                } else if (!checkBetDicision(this.getTeamB())) {
                     this.getSetting().setGameState(Setting.GAME_STATE.FINISH);
                     this.getSetting().setWinner(this.getTeamA().getTeamName());
                 }
-                
+
             }
 
-        } 
+        }
         if (this.getSetting().getGameState() == Setting.GAME_STATE.PLACE) {
             findBestDecisionPlace();
             this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
-            System.out.println("DONE PLACING");
-        } 
+
+        }
         if (this.getSetting().getGameState() == Setting.GAME_STATE.ACTION) {
-System.out.println("BE ACTTING");
+
             findBestDecisionAction();
-            
-System.out.println("DONE FINDING BEST ACTION");
+
             updateStatusBoard();
-            
-System.out.println("DONE UPDATING BOARD");
+
             this.getSetting().updateActionTurn();
 
-            if (checkFinnish()) {
+            if (checkFinnish ()) {
                 this.getSetting().setGameState(Setting.GAME_STATE.FINISH);
             }
 
-        } 
+        }
         if (this.getSetting().getGameState() == Setting.GAME_STATE.FINISH) {
 
             // end of a game
@@ -154,7 +151,6 @@ System.out.println("DONE UPDATING BOARD");
                 this.getPopulation().evolution();
                 //   System.out.println("DONE EVOLUION");
                 this.nextSeason();
-                
 
             }
 
@@ -175,7 +171,7 @@ System.out.println("DONE UPDATING BOARD");
             this.getTeamA().addTank(this.getTanks()[ this.getSetting().getCurrentBetTurn()]);
             this.getTeamA().payMoney(this.getTeamA().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice());
 
-        } 
+        }
         if (this.getTeamA().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice() <= this.getTeamB().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice()) {
             this.getTeamB().addTank(this.getTanks()[ this.getSetting().getCurrentBetTurn()]);
             this.getTeamB().payMoney(this.getTeamB().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice());
@@ -189,7 +185,7 @@ System.out.println("DONE UPDATING BOARD");
         DecisionAction bestDecisionAction = new DecisionAction();
         int dx[] = {0, 0, -1, 1};
         int dy[] = {1, -1, 0, 0};
-         int maxVal = -999999;
+        int maxVal = -999999;
 
         if (this.getSetting().getCurrentTeamAction() == "A") {
 
@@ -237,7 +233,7 @@ System.out.println("DONE UPDATING BOARD");
             this.getTeamA().addDecisionAction(bestDecisionAction);
 
         } // end of team A
-        else if (this.getSetting().getCurrentTeamAction()=="B") { // else team B
+        else if (this.getSetting().getCurrentTeamAction() == "B") { // else team B
             maxVal = -999999;
             for (int i = 0; i < this.getTeamB().getNumOfTank(); i++) {
                 if (this.getTeamB().getTanks()[i].isAlive()) {
@@ -279,11 +275,11 @@ System.out.println("DONE UPDATING BOARD");
 
                 } // check alive
             } // end of each Tank
-           
+
             this.getTeamB().addDecisionAction(bestDecisionAction);
 
         } // end of team B
-         System.out.println("Current Team : " +  this.getSetting().getCurrentTeamAction());
+        System.out.println("Current Team : " + this.getSetting().getCurrentTeamAction());
     }
     /*
      // create next Battle Match without betting & placing
@@ -348,17 +344,6 @@ System.out.println("DONE UPDATING BOARD");
 
     }
 
-    boolean checkFinnish() {
-        if (this.getSetting().getCurrentActionTurn() == Setting.MAX_ACTION_TURN) {
-            return true;
-        }
-        if (this.getTeamA().checkOutOfTank() || this.getTeamB().checkOutOfTank()) {
-            return true;
-        }
-
-        return false;
-    }
-
     boolean nextTournamentMatch() {
         for (int i = 0; i < this.getPopulation().getNumOfChromosome() - 1; i++) {
             for (int j = i + 1; j < this.getPopulation().getNumOfChromosome(); j++) {
@@ -384,7 +369,7 @@ System.out.println("DONE UPDATING BOARD");
                 c[i][j] = false;
             }
         }
-        
+
         this.getSetting().setGameState(Setting.GAME_STATE.ACTION);
         currentGame = 0;
 
@@ -392,7 +377,7 @@ System.out.println("DONE UPDATING BOARD");
 
     // find best decision for each team
     void findBestDecisionBet() {
-        
+
         int price = 0;
         int numOfTopTank = (this.getSetting().getNumOfTank() - this.getSetting().getCurrentBetTurn()) / 2 + this.getSetting().getNumOfTank() % 2;
 
@@ -470,13 +455,13 @@ System.out.println("DONE UPDATING BOARD");
                     x = 1;
                 }
             }
-            x = Math.max(1, Game.COLUMN - this.getTeamA().getTanks()[i].getAttackRange()); 
+            x = Math.max(1, Game.COLUMN - this.getTeamA().getTanks()[i].getAttackRange());
             while (!isPlaced) { // trong truong hop qua xui khong dat duoc tren truc X @@
-                  x++;
+                x++;
                 if (x == Game.COLUMN + 1) {
                     x = 1;
                 }
-                 // tra ve vi tri X ban dau
+                // tra ve vi tri X ban dau
                 for (int j = 0; j < 4 && !isPlaced; j++) {
                     if (this.getTeamA().findTankByPosition(new Position(x, y)) == -1) {
                         this.getTeamA().getTanks()[i].setPosition(new Position(x, y));
@@ -484,13 +469,12 @@ System.out.println("DONE UPDATING BOARD");
                     }
                     y--;
                     if (y == (0)) {
-                        y = Game.ROW/2;
+                        y = Game.ROW / 2;
                     }
                 }
 
             } // DONE // gần như ko thể xảy ra trường hợp không thể đặt được ở cả trục X và Y. FACK !!!
-            
-            
+
         } // end of place tank A
 
         // place tanks's of Team B
@@ -510,10 +494,10 @@ System.out.println("DONE UPDATING BOARD");
                     x = 1;
                 }
             }
-     x = Math.max(1, Game.COLUMN - this.getTeamB().getTanks()[i].getAttackRange());// tra ve vi tri X ban dau
-           
+            x = Math.max(1, Game.COLUMN - this.getTeamB().getTanks()[i].getAttackRange());// tra ve vi tri X ban dau
+
             while (!isPlaced) { // trong truong hop qua xui khong dat duoc tren truc X @@
-                 x++;
+                x++;
                 if (x == Game.COLUMN + 1) {
                     x = 1;
                 }
@@ -523,8 +507,8 @@ System.out.println("DONE UPDATING BOARD");
                         isPlaced = true;
                     }
                     y++;
-                    if (y == (Game.ROW  +1)) {
-                        y = Game.ROW/2+1;
+                    if (y == (Game.ROW + 1)) {
+                        y = Game.ROW / 2 + 1;
                     }
                 }
 

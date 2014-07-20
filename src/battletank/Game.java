@@ -303,4 +303,16 @@ public class Game {
        // check destination
         // check range
     }
+    // finish game at Action turn
+public boolean checkFinnish() {
+        if (this.getSetting().getCurrentActionTurn() == Setting.MAX_ACTION_TURN) {
+            return true;
+        }
+        if (this.getTeamA().checkOutOfTank() || this.getTeamB().checkOutOfTank()) {
+            return true;
+        }
+
+        return false;
+    }
+     
 }

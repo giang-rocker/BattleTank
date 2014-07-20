@@ -6,17 +6,42 @@
 
 package battletank;
 
+import battletank.geneticAlgorithm.Chromosome;
+import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Administrator
  */
 public class ManualBattle extends javax.swing.JFrame {
 
+     public ManualGame game;
+    
+      DrawBattleScreen battleScreen;
+    
     /**
      * Creates new form ManualBattle
      */
     public ManualBattle() {
         initComponents();
+        game.setReport( new Report(1));
+        try {
+            this.game.getReport().readSetting(game);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AutoGameScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setLocation(0, 0);
+       
+        this.getContentPane().setBackground(Color.BLACK);
+        
+        battleScreen = new DrawBattleScreen(game);
+        battleScreen.setLocation(300, 50);
+        battleScreen.setSize(800, 800);
+        battleScreen.setBackground(Color.white);
+        battleScreen.setVisible(true);
     }
 
     /**
@@ -29,16 +54,17 @@ public class ManualBattle extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1200, 750));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 1200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 750, Short.MAX_VALUE)
         );
 
         pack();
@@ -81,4 +107,12 @@ public class ManualBattle extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+ public void update () {
+       
+      game.updateGame();
+     battleScreen.update(game);
+     battleScreen.validate();
+       
+    }
+
 }
