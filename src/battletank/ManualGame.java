@@ -6,6 +6,7 @@
 package battletank;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,8 +18,13 @@ public class ManualGame extends Game {
 
     @Override
     public void updateGame() {
+        // ready
+        if (this.getSetting().getGameState() == Setting.GAME_STATE.READY) {
+              this.getSetting().setGameState(Setting.GAME_STATE.BET);
+        }
+        
         // Betting
-        if (this.getSetting().getGameState() == Setting.GAME_STATE.BET) {
+     if (this.getSetting().getGameState() == Setting.GAME_STATE.BET) {
             try {
                 // read Decision Bet of team A
                 
@@ -30,6 +36,9 @@ public class ManualGame extends Game {
                 // update bet file for team B
                 
                 // check illegal
+                
+                // update bet turn
+                this.getSetting().updateBetTurn();
                 
                 // check end of bet
                 if (this.getSetting().getCurrentBetTurn() == this.getSetting().getNumOfTank()) {
@@ -93,5 +102,30 @@ public class ManualGame extends Game {
 
         }
     }
+public void generateGame() {
+        //  random match
+        Random R = new Random();
 
+        this.getTeamA().resetStatistic();
+        this.getTeamB().resetStatistic();
+
+        int armor, damage, attackRange;
+        int x, y;
+        for (int i = 0; i < Setting.MAX_TANK; i++) {
+            armor = R.nextInt(Tank.rangeOfValue) + 1;
+            damage = R.nextInt(Tank.rangeOfValue / 2) + 1;
+            attackRange = R.nextInt(Tank.rangeOfValue - 2) + 2;
+            this.getTanks()[i] = new Tank(armor, damage, attackRange);
+
+        }
+
+        this.getTeamA().setMoney(this.getSetting().getDefaultMoney());
+        this.getTeamB().setMoney(this.getSetting().getDefaultMoney());
+        this.getSetting().setCurrentActionTurn(0);
+        this.getSetting().setCurrentBetTurn(0);
+        this.getSetting().setGameState(Setting.GAME_STATE.READY);
+        //     System.out.println("END OF CREATE");
+
+    }
+    
 }

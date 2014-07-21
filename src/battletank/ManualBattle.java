@@ -9,6 +9,7 @@ package battletank;
 import battletank.geneticAlgorithm.Chromosome;
 import java.awt.Color;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +28,7 @@ public class ManualBattle extends javax.swing.JFrame {
      */
     public ManualBattle() {
         initComponents();
+        game = new ManualGame();
         game.setReport( new Report(1));
         try {
             this.game.getReport().readSetting(game);
@@ -38,10 +40,12 @@ public class ManualBattle extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.BLACK);
         
         battleScreen = new DrawBattleScreen(game);
-        battleScreen.setLocation(300, 50);
+        battleScreen.setLocation(380, 120);
         battleScreen.setSize(800, 800);
         battleScreen.setBackground(Color.white);
         battleScreen.setVisible(true);
+        game.generateGame();
+        this.add(battleScreen);
     }
 
     /**
@@ -79,6 +83,8 @@ public class ManualBattle extends javax.swing.JFrame {
         btnExecuteActionA = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtDecisionActionA = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,6 +150,22 @@ public class ManualBattle extends javax.swing.JFrame {
         txtDecisionActionA.setRows(5);
         jScrollPane6.setViewportView(txtDecisionActionA);
 
+        jButton1.setFont(new java.awt.Font("Palatino Linotype", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 153, 0));
+        jButton1.setText("UPDATE");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
+        jButton2.setText("Reset");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,11 +216,24 @@ public class ManualBattle extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnExecuteActionB)))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(502, 502, 502))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -215,7 +250,7 @@ public class ManualBattle extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExecutePlaceB)
@@ -241,6 +276,16 @@ public class ManualBattle extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        game.generateGame();
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -290,6 +335,8 @@ public class ManualBattle extends javax.swing.JFrame {
     private javax.swing.JButton btnWriteBetFileB;
     private javax.swing.JButton btnWritePlaceFileA;
     private javax.swing.JButton btnWritePlaceFileB;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -306,11 +353,22 @@ public class ManualBattle extends javax.swing.JFrame {
     private javax.swing.JTextArea txtDecisionPlaceB;
     // End of variables declaration//GEN-END:variables
  public void update () {
-       
-      game.updateGame();
+     
+   
+   
+     if ( game.getSetting().getGameState()== Setting.GAME_STATE.BET ) {
+         game.getTeamA().addDecisionBet( new DecisionBet(game.getSetting().getCurrentBetTurn(),Integer.parseInt( this.txtDecisionBetA.getText() ) ));
+         game.getTeamB().addDecisionBet( new DecisionBet(game.getSetting().getCurrentBetTurn(),Integer.parseInt( this.txtDecisionBetB.getText() ) ));
+         try {
+             game.getReport().updateTeamReportBet(game);
+         } catch (IOException ex) {
+             Logger.getLogger(ManualBattle.class.getName()).log(Level.SEVERE, null, ex);
+         }
+     }
+     game.updateGame();
      battleScreen.update(game);
      battleScreen.validate();
-       
+     
     }
 
 }
