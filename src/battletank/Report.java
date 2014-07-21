@@ -51,7 +51,7 @@ public class Report {
     private String file_teamB_decisionAction = "";
     private String file_teamA_status = "";
     private String file_teamB_status = "";
-    
+   
     // genetic algorthm report // report population
         private String generation_path = "";
         
@@ -84,6 +84,10 @@ public class Report {
         this.teamB_part = this.report_path + "/teamB";
 
         // teams's part
+         // decision files of 2 teams
+         file_teamA_decisionBet = this.teamA_part + "/" + matchId + "_decision_bet_A.txt";
+         file_teamB_decisionBet = this.teamB_part + "/" + matchId + "_decision_bet_B.txt";
+
         file_teamA_decisionPlace = this.teamA_part + "/" + matchId + "_decision_place_A.txt";
         file_teamB_decisionPlace = this.teamB_part + "/" + matchId + "_decision_place_B.txt";
         file_teamA_decisionAction = this.teamA_part + "/" + matchId + "_decision_action_A.txt";
@@ -150,26 +154,29 @@ public class Report {
         String getLine = "";
 
         // decision files of 2 teams
-        String teamADecisionBetFile = this.teamA_part + "/" + game.getSetting().getMatchID() + "_decision_bet_A.txt";
-        String teamBDecisionBetFile = this.teamB_part + "/" + game.getSetting().getMatchID() + "_decision_bet_B.txt";
-
+        
+       
         // desision of each team
         DecisionBet teamADecisionBet = new DecisionBet();
         DecisionBet teamBDecisionBet = new DecisionBet();
 
         // get decision bet of each team
         // TEAM A
-        is = new FileInputStream(teamADecisionBetFile);
+        is = new FileInputStream(file_teamA_decisionBet);
         input = new Scanner(is, "UTF-8");// set utf-8
         teamADecisionBet.setBetTurn(game.getSetting().getCurrentBetTurn());
+        // ignore currentbetturn
+        getLine = input.nextLine(); 
         getLine = input.nextLine();
         teamADecisionBet.setPrice(Integer.parseInt(getLine));
         game.getTeamA().addDecisionBet(teamADecisionBet);
         is.close();
         // TEAM B
-        is = new FileInputStream(teamBDecisionBetFile);
+        is = new FileInputStream(file_teamB_decisionBet);
         input = new Scanner(is, "UTF-8");// set utf-8
         teamBDecisionBet.setBetTurn(game.getSetting().getCurrentBetTurn());
+         // ignore currentbetturn
+        getLine = input.nextLine(); 
         getLine = input.nextLine();
         teamBDecisionBet.setPrice(Integer.parseInt(getLine));
         game.getTeamB().addDecisionBet(teamBDecisionBet);
@@ -547,4 +554,42 @@ public class Report {
          writerPopulation.close();
     }
  
+    public void writeTeamDecisionBet (Game game) {
+    
+        Writer writerTeamA = null;
+        File f = new File(file_teamA_decisionBet);
+       
+
+            try {
+                writerTeamA = new BufferedWriter(new FileWriter(new File(file_teamA_decisionBet)));
+
+                writerTeamA.write(game.getSetting().getCurrentBetTurn() + "\n");
+                writerTeamA.write(game.getTeamA().getDecisiontBet()[game.getSetting().getCurrentBetTurn()].getPrice() + "\n");
+                writerTeamA.close();
+
+            } catch (IOException ex) {
+                 System.out.println("SSS");
+                Logger.getLogger(BattleScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+       
+         Writer writerTeamB = null;
+          f = new File(file_teamB_decisionBet);
+         
+
+            try {
+                writerTeamB = new BufferedWriter(new FileWriter(new File(file_teamB_decisionBet)));
+
+                writerTeamB.write(game.getSetting().getCurrentBetTurn() + "\n");
+                writerTeamB.write(game.getTeamB().getDecisiontBet()[game.getSetting().getCurrentBetTurn()].getPrice() + "\n");
+                writerTeamB.close();
+
+            } catch (IOException ex) {
+                System.out.println("SSS");
+                Logger.getLogger(BattleScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+    
+    }
+    
 }

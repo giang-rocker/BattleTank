@@ -74,7 +74,7 @@ public class ManualBattle extends javax.swing.JFrame {
         btnExecutePlaceA = new javax.swing.JButton();
         btnWritePlaceFileA = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        txtDecisionPlaceA1 = new javax.swing.JTextArea();
+        txtDecisionPlaceA = new javax.swing.JTextArea();
         btnExecuteActionB = new javax.swing.JButton();
         btnWriteActionFileB = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -87,14 +87,21 @@ public class ManualBattle extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1400, 800));
 
+        txtDecisionBetA.setBackground(new java.awt.Color(0, 0, 0));
         txtDecisionBetA.setColumns(20);
+        txtDecisionBetA.setFont(new java.awt.Font("Mufferaw", 1, 24)); // NOI18N
+        txtDecisionBetA.setForeground(new java.awt.Color(51, 153, 0));
         txtDecisionBetA.setRows(5);
         txtDecisionBetA.setAutoscrolls(false);
         txtDecisionBetA.setMargin(new java.awt.Insets(1, 1, 1, 1));
         jScrollPane1.setViewportView(txtDecisionBetA);
 
+        txtDecisionBetB.setBackground(new java.awt.Color(0, 0, 0));
         txtDecisionBetB.setColumns(20);
+        txtDecisionBetB.setFont(new java.awt.Font("Mufferaw", 1, 24)); // NOI18N
+        txtDecisionBetB.setForeground(new java.awt.Color(51, 153, 0));
         txtDecisionBetB.setRows(5);
         jScrollPane2.setViewportView(txtDecisionBetB);
 
@@ -114,7 +121,10 @@ public class ManualBattle extends javax.swing.JFrame {
 
         btnWriteBetFileA.setText("Write->File");
 
+        txtDecisionPlaceB.setBackground(new java.awt.Color(0, 0, 0));
         txtDecisionPlaceB.setColumns(20);
+        txtDecisionPlaceB.setFont(new java.awt.Font("Mufferaw", 1, 24)); // NOI18N
+        txtDecisionPlaceB.setForeground(new java.awt.Color(51, 153, 0));
         txtDecisionPlaceB.setRows(5);
         txtDecisionPlaceB.setAutoscrolls(false);
         txtDecisionPlaceB.setMargin(new java.awt.Insets(1, 1, 1, 1));
@@ -128,17 +138,23 @@ public class ManualBattle extends javax.swing.JFrame {
 
         btnWritePlaceFileA.setText("Write->File");
 
-        txtDecisionPlaceA1.setColumns(20);
-        txtDecisionPlaceA1.setRows(5);
-        txtDecisionPlaceA1.setAutoscrolls(false);
-        txtDecisionPlaceA1.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        jScrollPane4.setViewportView(txtDecisionPlaceA1);
+        txtDecisionPlaceA.setBackground(new java.awt.Color(0, 0, 0));
+        txtDecisionPlaceA.setColumns(20);
+        txtDecisionPlaceA.setFont(new java.awt.Font("Mufferaw", 1, 24)); // NOI18N
+        txtDecisionPlaceA.setForeground(new java.awt.Color(51, 153, 0));
+        txtDecisionPlaceA.setRows(5);
+        txtDecisionPlaceA.setAutoscrolls(false);
+        txtDecisionPlaceA.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        jScrollPane4.setViewportView(txtDecisionPlaceA);
 
         btnExecuteActionB.setText("Execute");
 
         btnWriteActionFileB.setText("Write->File");
 
+        txtDecisionActionB.setBackground(new java.awt.Color(0, 0, 0));
         txtDecisionActionB.setColumns(20);
+        txtDecisionActionB.setFont(new java.awt.Font("Mufferaw", 1, 24)); // NOI18N
+        txtDecisionActionB.setForeground(new java.awt.Color(51, 153, 0));
         txtDecisionActionB.setRows(5);
         jScrollPane5.setViewportView(txtDecisionActionB);
 
@@ -146,7 +162,10 @@ public class ManualBattle extends javax.swing.JFrame {
 
         btnExecuteActionA.setText("Execute");
 
+        txtDecisionActionA.setBackground(new java.awt.Color(0, 0, 0));
         txtDecisionActionA.setColumns(20);
+        txtDecisionActionA.setFont(new java.awt.Font("Mufferaw", 1, 24)); // NOI18N
+        txtDecisionActionA.setForeground(new java.awt.Color(51, 153, 0));
         txtDecisionActionA.setRows(5);
         jScrollPane6.setViewportView(txtDecisionActionA);
 
@@ -193,7 +212,7 @@ public class ManualBattle extends javax.swing.JFrame {
                         .addComponent(btnWritePlaceFileA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExecutePlaceA)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1051, Short.MAX_VALUE)
                         .addComponent(btnWritePlaceFileB)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExecutePlaceB))
@@ -208,7 +227,7 @@ public class ManualBattle extends javax.swing.JFrame {
                                 .addComponent(btnWriteActionFileA)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnExecuteActionA)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 848, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -219,9 +238,9 @@ public class ManualBattle extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(590, 590, 590)
                 .addComponent(jButton1)
-                .addGap(502, 502, 502))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +269,7 @@ public class ManualBattle extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExecutePlaceB)
@@ -349,25 +368,40 @@ public class ManualBattle extends javax.swing.JFrame {
     private javax.swing.JTextArea txtDecisionActionB;
     private javax.swing.JTextArea txtDecisionBetA;
     private javax.swing.JTextArea txtDecisionBetB;
-    private javax.swing.JTextArea txtDecisionPlaceA1;
+    private javax.swing.JTextArea txtDecisionPlaceA;
     private javax.swing.JTextArea txtDecisionPlaceB;
     // End of variables declaration//GEN-END:variables
  public void update () {
      
    
    
-     if ( game.getSetting().getGameState()== Setting.GAME_STATE.BET ) {
+     if ( game.getSetting().getGameState()== Setting.GAME_STATE.BET || game.getSetting().getGameState()== Setting.GAME_STATE.READY  ) {
          game.getTeamA().addDecisionBet( new DecisionBet(game.getSetting().getCurrentBetTurn(),Integer.parseInt( this.txtDecisionBetA.getText() ) ));
          game.getTeamB().addDecisionBet( new DecisionBet(game.getSetting().getCurrentBetTurn(),Integer.parseInt( this.txtDecisionBetB.getText() ) ));
-         try {
-             game.getReport().updateTeamReportBet(game);
-         } catch (IOException ex) {
-             Logger.getLogger(ManualBattle.class.getName()).log(Level.SEVERE, null, ex);
-         }
-     }
+        // ghi file
+        game.getReport().writeTeamDecisionBet(game);
+    }
+     else  if ( game.getSetting().getGameState()== Setting.GAME_STATE.PLACE  ) {
+      
+    }
+     
      game.updateGame();
      battleScreen.update(game);
      battleScreen.validate();
+     
+     // update tanks for eachteam
+     // write decision place place
+     String txtDecisionPlaceA = "";
+     for (int i =0; i < game.getTeamA().getNumOfTank(); i ++) 
+         txtDecisionPlaceA += game.getTeamA().getTanks()[i].getAmor()+" "+game.getTeamA().getTanks()[i].getDamange()+" "+game.getTeamA().getTanks()[i].getAttackRange()+" x y\n";
+     
+     this.txtDecisionPlaceA.setText(txtDecisionPlaceA);
+     
+      String txtDecisionPlaceB = "";
+     for (int i =0; i < game.getTeamB().getNumOfTank(); i ++) 
+         txtDecisionPlaceB += game.getTeamB().getTanks()[i].getAmor()+" "+game.getTeamB().getTanks()[i].getDamange()+" "+game.getTeamB().getTanks()[i].getAttackRange()+" x y\n";
+     
+     this.txtDecisionPlaceB.setText(txtDecisionPlaceB);
      
     }
 

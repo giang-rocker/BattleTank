@@ -37,8 +37,10 @@ public class ManualGame extends Game {
                 
                 // check illegal
                 
-                // update bet turn
-                this.getSetting().updateBetTurn();
+                 // update Tank && betturn
+                updateBetTurn();
+                
+               
                 
                 // check end of bet
                 if (this.getSetting().getCurrentBetTurn() == this.getSetting().getNumOfTank()) {
@@ -127,5 +129,23 @@ public void generateGame() {
         //     System.out.println("END OF CREATE");
 
     }
-    
+
+@Override
+    void updateBetTurn() {
+
+        // update Tank for bet turn
+        if (this.getTeamA().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice() >= this.getTeamB().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice()) {
+            this.getTeamA().addTank(this.getTanks()[ this.getSetting().getCurrentBetTurn()]);
+            this.getTeamA().payMoney(this.getTeamA().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice());
+
+        }
+        if (this.getTeamA().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice() <= this.getTeamB().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice()) {
+            this.getTeamB().addTank(this.getTanks()[ this.getSetting().getCurrentBetTurn()]);
+            this.getTeamB().payMoney(this.getTeamB().getDecisiontBet()[this.getSetting().getCurrentBetTurn()].getPrice());
+
+        }
+        // next turn
+        this.getSetting().updateBetTurn();
+    }
+
 }
